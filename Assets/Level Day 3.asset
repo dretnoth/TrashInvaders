@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9038428fc30c547b3a1ca657539160, type: 3}
+  m_Name: Level Day 3
+  m_EditorClassIdentifier: 
+  descriptionMain: Damn those Aliens! They don't quit this time they dint even bother
+    to make a bother to pack they trash. They are bringing something dangerous mixing
+    in it. We cannot afford to put our vehicle out of duty. Do what you can to evade
+    the dangerous stuff.
+  descriptionSkills: Neighborhood watch reports, that there is a lot of dust on board,
+    like 300 pieces. But they spot even something that resembling explosive substances.
+  PrefabBoss: {fileID: 5337471687097330195, guid: 8f7a5f823c5a4e242938df4debf9294c, type: 3}
+  spriteBoss: {fileID: 21300000, guid: c931685d35e23aa40b84a62c4c62f869, type: 3}
