@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14630c4139523b4da148927c4ab4d54, type: 3}
+  m_Name: Ending Article
+  m_EditorClassIdentifier: 
+  label: A foot has been put down!
+  mainMesage: After-match of after-party put a great pressure on waste disposal.
+    More that Army it was the effort of GCC that save the day. Local authorities
+    promised to promote the bill against space level littering. Neighborhood watch
+    insisted on an optional, more direct approach to deal with the issue of trespassing
+    littering.
+  secondMesage: Local hero a driver on garbage truck has take the revenge on littering
+    of loitering aliens into his own hands, with a help of neighborhood watch, colleagues,
+    friends and arsenal.
+  articleSprite1: {fileID: 21300000, guid: bb395739480e22a49a520844d7778831, type: 3}
+  articleSprite2: {fileID: 21300000, guid: e63436f4afa9f5a4f9ba56a6f500e53c, type: 3}
+  secondArticleSprite: {fileID: 21300000, guid: 96cd28dbbd0efa641a6f0f7d89d1ac17, type: 3}

@@ -9,7 +9,9 @@ public class TrashTruckFella : MonoBehaviour
     public float speedMove = 3f;
     public int trashCollected=0;
 
-    public bool isMovingLeft=false, isOnDuty;
+    public bool isMovingLeft=false, isOnDuty, isStunned, isStunProtected;
+    public float stunedInterval=4f, stunProtectionInterval=3f;
+    float stunTimer=0;
     Vector3 pos;
     public Sprite[] mySprites;
     public AudioSource collectingAS;
@@ -46,6 +48,25 @@ public class TrashTruckFella : MonoBehaviour
             }
             transform.position = pos;
         }
+
+        if(isStunned || isStunProtected){
+                stunTimer += Time.deltaTime;
+
+                if(isStunned)
+                if(stunTimer > stunedInterval){
+                    stunTimer = 0;
+                    isStunned = false;
+                    isStunProtected = true;
+                    mySpriteRenderer.color = Color.blue;
+                }
+
+                if(isStunProtected)
+                if(stunTimer > stunProtectionInterval){
+                    stunTimer = 0;
+                    isStunProtected = false;
+                    mySpriteRenderer.color = Color.white;
+                }
+            }
     }
 
     public void ChangeDirection(){
@@ -74,5 +95,12 @@ public class TrashTruckFella : MonoBehaviour
             other.GetComponent<Box>().Deactivate();
             collectingAS.Play();
         }
+    }
+
+    public void GotHitByABomb(){
+        if(!isStunned && !isStunProtected){
+            isStunned = true;
+            mySpriteRenderer.color = Color.red;  
+        }        
     }
 }

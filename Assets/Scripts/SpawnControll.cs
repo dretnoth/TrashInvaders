@@ -93,7 +93,7 @@ public class SpawnControll : MonoBehaviour
         bulletTransform.transform.position = pos;
         bulletTransform.transform.rotation = angle;
 
-        controller.bulletsFired++;
+        controller.bulletsHeavyFirred++;
     }
 
 
@@ -138,7 +138,7 @@ public class SpawnControll : MonoBehaviour
         }
 
         if(!isFounded){
-            GameObject go = (GameObject)Instantiate(prefabTrashPacket, Vector3.zero, Quaternion.identity);
+            GameObject go = (GameObject)Instantiate(prefabTrashBlock, Vector3.zero, Quaternion.identity);
             boxTransform = go.transform;
             listOfTrashBoxes.Add(boxTransform);            
             go.transform.SetParent(folderForTrash);
@@ -243,7 +243,8 @@ public class SpawnControll : MonoBehaviour
 
 
     public void CommandSpawnNewPlayer(){
-        GameObject player = (GameObject) Instantiate(prefabPlayerTrashTruck, new Vector3(0,-4,0), Quaternion.identity);
+        GameObject player = (GameObject) Instantiate(prefabPlayerTrashTruck, 
+            new Vector3(0,controller.groundSurfaceY,0), Quaternion.identity);
         controller.playerTransform = player.transform;
     }
 
@@ -269,7 +270,7 @@ public class SpawnControll : MonoBehaviour
     public void CommandSpawnATrashTruckFella(){
         bool isOnRight = false;
         if(Random.Range(0,100) > 50) isOnRight = true;
-        Vector3 pos = new Vector3 (-9, -4f, 0);
+        Vector3 pos = new Vector3 (-9, controller.groundSurfaceY, 0);
         GameObject go = (GameObject)Instantiate(prefabTrashTruckFella, pos, Quaternion.identity);
         if(isOnRight){
             pos.x = 9;

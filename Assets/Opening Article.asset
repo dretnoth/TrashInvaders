@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14630c4139523b4da148927c4ab4d54, type: 3}
+  m_Name: Opening Article
+  m_EditorClassIdentifier: 
+  label: Aliens spotted on the sky!
+  mainMesage: An allies activity was finally confirmed. As no grand Invasion or extermination
+    happened and military not take yet any action; there shall be no reason for a
+    panic. Even neighborhood watch reporting loitering aliens, seemly doing nothing
+    sinister. Early investigation shows that the allies attended some kind of galactic
+    party and on they way home they stray to our planet. For that an unexpected large
+    after party occurred on multiple places, to celebrate the interplanetary encounter.
+  secondMesage: Local authorities are worried by an unexpected rise of garbage lying
+    around. GCC, the garbage collection company is tasked to take an action.
+  articleSprite1: {fileID: 21300000, guid: a0c5b3250b5b19d4cbd7d6e065b3d305, type: 3}
+  articleSprite2: {fileID: 21300000, guid: 6ed3e0773129c8c4b8de0c5a58a67f45, type: 3}
+  secondArticleSprite: {fileID: 21300000, guid: 666b7df9c9d09e94dae03d4a732cda07, type: 3}

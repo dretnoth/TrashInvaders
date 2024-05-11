@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,50 +12,113 @@ public class MagnumRevolverGraphicController : MonoBehaviour
     public bool isPlayerAlive;
     public int bulletsInChamber=6;
     PlayerController playerController = null;
-    public Transform reloadingMesage;
+    public Transform reloadingMesage; public TMP_Text reloadingMesageText;
 
     void Start()
     {
         if(gameController == null) gameController = GameController.controll;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        
+    }
+
+
+    public void ChangeOnBulletsInChamber(){
         if(gameController.isPlayModeOn){
-            if(gameController.playerTransform != null){
-                if(isPlayerAlive == false){
-                    isPlayerAlive = true;
-                    OperationSetMagnumVisible(true);
-                }
-                if(playerController == null) 
-                    playerController = gameController.playerTransform.
-                        GetComponent<PlayerController>();
-                if(bulletsInChamber != playerController.heavyBulletsReserve){
-                    bulletsInChamber = playerController.heavyBulletsReserve;
-                    for(int i = 0; i < 6; i++) {
-                        if(bulletsInChamber > i){
-                            bulletInChamberSpriteTransform[i].gameObject.SetActive(true);
-                        }else{
-                            bulletInChamberSpriteTransform[i].gameObject.SetActive(false);
-                        }
+            OperationReloadingMesage(true);
+        }else{
+            OperationReloadingMesage(false);
+        }
+
+        if(playerController == null){
+            playerController = gameController.playerTransform.
+                GetComponent<PlayerController>();
+        }
+
+        if(gameController.playerTransform != null){
+            if(bulletsInChamber != playerController.heavyBulletsReserve){
+                bulletsInChamber = playerController.heavyBulletsReserve;
+                for(int i = 0; i < 6; i++) {
+                    if(bulletsInChamber > i){
+                       bulletInChamberSpriteTransform[i].gameObject.SetActive(true);
+                   }else{
+                       bulletInChamberSpriteTransform[i].gameObject.SetActive(false);
                     }
                 }
-                if(playerController.isReloadingHeavyBullet){
-                    OperationReloadingMesage(true);
-                }else{
-                    OperationReloadingMesage(false);
-                }
+            }
+            if(isPlayerAlive == false){
+                isPlayerAlive = true;
+                OperationSetMagnumVisible(true);
+            }
+        }else{
+            isPlayerAlive = false;
+            OperationSetMagnumVisible(false);
+        }
 
+        if(gameController.isFightOn == false){
+            reloadingMesageText.text = "Get ready!";
+        }else{
+            if(playerController != null){
+                if(playerController.isStunned){
+                    reloadingMesageText.text = "Stuned!";
+                } else if(playerController.isReloadingHeavyBullet){
+                    reloadingMesageText.text = "Reloading!";
+                } else if(playerController.isRevolverSpining){
+                    reloadingMesageText.text = "Wait!";
+                } else if(bulletsInChamber == 6){
+                    reloadingMesageText.text = "";
+                }
+                
+
+                
             }else{
-                if(isPlayerAlive == true){
-                    isPlayerAlive = false;
-                    OperationSetMagnumVisible(false);
-                    OperationReloadingMesage(false);
+                if(gameController.isFightOn){
+                    reloadingMesageText.text = "Hallo?";
                 }
             }
         }
+        
+        
+        
+
+       
+
+        
+
+        
+
+        
+
+        //Debug.Log($"");
+    }//ChangeOnBulletsInChamber
+
+
+    /*
+    //delete after testing
+    public void OrderMagnumRevolver(){
+            OperationReloadingMesage(true);
+        if(gameController.isFightOn == false){
+            reloadingMesageText.text = "Get ready!";
+        }
+
+        if(playerController == null) 
+            playerController = gameController.playerTransform.GetComponent<PlayerController>();
+
+        if(playerController.isReloadingHeavyBullet){
+            reloadingMesageText.text = "Reloading!";
+        }
+        if(playerController.isRevolverSpining){
+            reloadingMesageText.text = "Wait!";
+        }
+        if(!playerController.isReloadingHeavyBullet && !playerController.isRevolverSpining){
+            OperationReloadingMesage(false);
+        }
+                
     }
+    */
 
     void OperationReloadingMesage(bool option){
         if(option){

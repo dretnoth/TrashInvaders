@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float BulletFireIntervalNormal= 0.5f; float BulletFireTimer = 0;
     public float HeavyBulletFireIntervalNormal= 1f; float HeavyBulletFireTimer = 0;
     public int heavyBulletsReserve=0;
-    public bool isReloadingHeavyBullet;
+    public bool isReloadingHeavyBullet, isRevolverSpining;
     
     [Header("Relefernces")]
     public GameController controll;
@@ -46,20 +46,7 @@ public class PlayerController : MonoBehaviour
             inputHorizontalValue = Input.GetAxis("Horizontal");
 
             if(inputHorizontalValue != 0 && !isStunned) {
-                pos.x += inputHorizontalValue * speedMove * Time.deltaTime;
-
-                if(inputHorizontalValue < 0) if(isMovingLeft == false) {
-                    mySpriteRenderer.flipX = false;
-                    isMovingLeft = true;
-                }
-                if(inputHorizontalValue > 0) if(isMovingLeft == true) {
-                    mySpriteRenderer.flipX = true;
-                    isMovingLeft = false;
-                }
-            
-                if(pos.x < -6) pos.x = -6;
-                if(pos.x > 6) pos.x = 6;
-                transform.position = pos;
+                OperationHorisontalMovement();
             }
 
             if(isStunned || isStunProtected){
@@ -71,6 +58,7 @@ public class PlayerController : MonoBehaviour
                     isStunned = false;
                     isStunProtected = true;
                     mySpriteRenderer.color = Color.blue;
+                    controll.magnumRevolver.ChangeOnBulletsInChamber();
                 }
 
                 if(isStunProtected)
@@ -86,22 +74,15 @@ public class PlayerController : MonoBehaviour
             BulletFireTimer -= Time.deltaTime;
             HeavyBulletFireTimer -= Time.deltaTime;
 
+            
             if(BulletFireTimer < 0){
-                BulletFireTimer = BulletFireIntervalNormal;
+                BulletFireTimer = BulletFireIntervalNormal;                
                 controll.spawnControll.CommandToSpawnABullet(transform.position, Quaternion.identity);
                 bulletAS.Play();
             }
             
             if(Input.GetButton ("Fire1"))
-            if(!isReloadingHeavyBullet){                
-                if(HeavyBulletFireTimer < 0){
-                    HeavyBulletFireTimer = HeavyBulletFireIntervalNormal;
-                    controll.spawnControll.CommandToSpawnAHeavyBullet(transform.position, Quaternion.identity);
-                    heavyBulletAS.Play();
-                    heavyBulletsReserve --;  
-                    if(heavyBulletsReserve <= 0) isReloadingHeavyBullet = true;
-                }
-            }
+                CommandFireSequence();
 
             if(isReloadingHeavyBullet){
                 if(HeavyBulletFireTimer < 0){
@@ -111,10 +92,15 @@ public class PlayerController : MonoBehaviour
                        isReloadingHeavyBullet = false; 
                        heavyBulletsReserve = 6;
                        HeavyBulletFireTimer = 3f;
+                       isRevolverSpining = true;
                        revolverSpinAS.Play();
                     }else{
                         heavyBulletReloadingAS.Play();
                     }
+                    if(isRevolverSpining && heavyBulletsReserve == 6){
+                        isRevolverSpining = false;
+                    }
+                    controll.magnumRevolver.ChangeOnBulletsInChamber();
                 }
             }
         }
@@ -122,6 +108,34 @@ public class PlayerController : MonoBehaviour
 
         
 
+    }
+
+
+    public void CommandFireSequence(){
+        if(!isReloadingHeavyBullet && !isStunned){                
+            if(HeavyBulletFireTimer < 0){
+                HeavyBulletFireTimer = HeavyBulletFireIntervalNormal;
+                controll.spawnControll.CommandToSpawnAHeavyBullet(transform.position, Quaternion.identity);
+                heavyBulletAS.Play();
+                heavyBulletsReserve --;  
+                controll.magnumRevolver.ChangeOnBulletsInChamber();
+                if(heavyBulletsReserve <= 0) {
+                    isReloadingHeavyBullet = true;;
+                }
+            }
+        }
+    }
+
+
+    public void ButtonInputHorisontalMovement(bool leftOfRigt){
+        if(leftOfRigt == false){
+            inputHorizontalValue = -1;
+        }else{
+            inputHorizontalValue = 1;
+        }
+        if(inputHorizontalValue != 0 && !isStunned) {
+            OperationHorisontalMovement();
+        }
     }
 
     public void CommandChecekAudioSettings(){
@@ -132,10 +146,29 @@ public class PlayerController : MonoBehaviour
         pickUpAS.volume = controll.soundController.sfxVolumeValue;
     }
 
+
+    public void OperationHorisontalMovement(){
+        pos.x += inputHorizontalValue * speedMove * Time.deltaTime;
+
+                if(inputHorizontalValue < 0) if(isMovingLeft == false) {
+                    mySpriteRenderer.flipX = false;
+                    isMovingLeft = true;
+                }
+                if(inputHorizontalValue > 0) if(isMovingLeft == true) {
+                    mySpriteRenderer.flipX = true;
+                    isMovingLeft = false;
+                }
+            
+                if(pos.x < -6) pos.x = -6;
+                if(pos.x > 6) pos.x = 6;
+                transform.position = pos;
+    }
+
     public void GotHitByABomb(){
         if(!isStunned && !isStunProtected){
             isStunned = true;
             mySpriteRenderer.color = Color.red;  
+            controll.magnumRevolver.ChangeOnBulletsInChamber();
         }        
     }
 }

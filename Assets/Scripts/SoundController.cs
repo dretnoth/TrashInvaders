@@ -9,8 +9,10 @@ public class SoundController : MonoBehaviour
     public GameController gameController;
     public AudioSource musicMenuAS, musicInGameAS;
     public AudioSource audioSRooster, audioSCheer, audioSYouLost, audioSYouWin, 
-        audioSExplosion;
-    public AudioClip[] musicAudioClips;
+        audioSExplosion, audioSPaper;
+    public AudioSource audioButtonHiglight, audioButtonPress, audioButtonSwithc;
+    public AudioClip[] musicAudioClips, uiButonHighlightACs, uiButtonPressACs,
+        uiButtonSwitchACs;
     public int musicInPlay;
 
 
@@ -24,7 +26,7 @@ public class SoundController : MonoBehaviour
 
     public void CommandPlayAMenuMusic(){
         if(musicInGameAS.isPlaying) musicInGameAS.Stop();
-        musicMenuAS.Play();
+        if(!musicMenuAS.isPlaying) musicMenuAS.Play();
     }
 
     public void CommandPlayInGameMusic(){
@@ -43,11 +45,36 @@ public class SoundController : MonoBehaviour
     public void CommandPlayYouLost(){audioSYouLost.Play();}
 
     public void CommandPlayYouWin(){
-        audioSYouLost.Play();
+        audioSYouWin.Play();
         musicInGameAS.Stop();
         }
 
     public void CommandPlayExplosion(){audioSExplosion.Play();}
+
+
+    public void CommandPlayPaper(){audioSPaper.Play();}
+
+
+    public void CommandPlayButtonHighlight(){
+        audioButtonHiglight.clip = uiButonHighlightACs[
+            (int)Random.Range(0, uiButonHighlightACs.Length-1)
+        ];
+        audioButtonHiglight.Play();
+    }
+
+    public void CommandPlayButtonPress(){
+        audioButtonPress.clip = uiButtonPressACs[
+            (int)Random.Range(0, uiButtonPressACs.Length-1)
+        ];
+        audioButtonPress.Play();
+    }
+
+    public void CommandPlayButtonSwitch(){
+        audioButtonSwithc.clip = uiButtonSwitchACs[
+            (int)Random.Range(0, uiButtonSwitchACs.Length-1)
+        ];
+        audioButtonSwithc.Play();
+    }
 
 
     public void CommandAudioVolumeCheckUp(){
@@ -57,9 +84,14 @@ public class SoundController : MonoBehaviour
         audioSRooster.volume = sfxVolumeValue;
         audioSCheer.volume = sfxVolumeValue;
         audioSExplosion.volume = sfxVolumeValue;
+        audioSPaper.volume = sfxVolumeValue;
         
         audioSYouWin.volume = sfxVolumeValue;
         audioSYouLost.volume = sfxVolumeValue;
+
+        audioButtonHiglight.volume = sfxVolumeValue;
+        audioButtonPress.volume = sfxVolumeValue;
+        audioButtonSwithc.volume = sfxVolumeValue;
 
         if(gameController.playerTransform != null){
             gameController.playerTransform.GetComponent<PlayerController>()

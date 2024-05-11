@@ -25,9 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.Core"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Mathematics", "Unity.Mathematics.csproj", "{F261717C-4082-2226-74B0-CFE835F79352}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Animation.Editor", "Unity.2D.Animation.Editor.csproj", "{5EC2A948-D87E-50AF-B227-DC79BB84B35E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Common.Path.Editor", "Unity.2D.Common.Path.Editor.csproj", "{40ABA18E-2F42-8A09-9961-4A1CF36E414B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Animation.Editor", "Unity.2D.Animation.Editor.csproj", "{5EC2A948-D87E-50AF-B227-DC79BB84B35E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.Core.Editor", "Unity.VisualScripting.Core.Editor.csproj", "{DAC5F37C-CB9D-E797-ED44-603EF04BB78E}"
 EndProject
@@ -157,14 +157,14 @@ Global
 		{F261717C-4082-2226-74B0-CFE835F79352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F261717C-4082-2226-74B0-CFE835F79352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F261717C-4082-2226-74B0-CFE835F79352}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40ABA18E-2F42-8A09-9961-4A1CF36E414B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40ABA18E-2F42-8A09-9961-4A1CF36E414B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40ABA18E-2F42-8A09-9961-4A1CF36E414B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40ABA18E-2F42-8A09-9961-4A1CF36E414B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EC2A948-D87E-50AF-B227-DC79BB84B35E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAC5F37C-CB9D-E797-ED44-603EF04BB78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAC5F37C-CB9D-E797-ED44-603EF04BB78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAC5F37C-CB9D-E797-ED44-603EF04BB78E}.Release|Any CPU.ActiveCfg = Release|Any CPU

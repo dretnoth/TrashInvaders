@@ -7,27 +7,32 @@ public class GameController : MonoBehaviour
     public int testValue=0;
     [Header("Bools")]
     public bool isTestingModeOn;
+    public bool isGamePaused;
     public bool isPlayModeOn, isFightOn, isTrashTruckFellaOnField, isEndOfTheLevel, isWictory;
     public bool isBossDead;
+    public bool isAndroidControlActive;
     public bool isMainMenuActive, isSettingsActive, isCreditsActive,
          isLevelDescriptionActive, isLevelResultActive;
+    public bool isFrontNewspaperActive;
 
 
     [Header("Variables")]
     public int levelCurrent = 0; public int levelMax=0;
     public int trashBoxDroped = 0, trashBoxShotDown = 0;
     public int trashPacketDroped=0, trashPacketSweeped=0, trashPacketStillOnField=0;
-    public int bulletsFired=0;
+    public int bulletsFired=0, bulletsHeavyFirred=0;
     
     
     
     public int bossesDestroyed=0, bossLastHp=0;
     public int trashBoxDropedTotal=0, trashBoxShotDownTotal=0, trashPacketDropedTotal=0,
-        trashPacketSweepedTotal=0, bulletsFiredTotal=0;
+        trashPacketSweepedTotal=0, bulletsFiredTotal=0, bulletsHeavyFiredTotal=0;
     public int trashTruckSweeping=0;
 
     public bool trashFellaPeriodicalArriveBool; public float trashFellaInterval =120;
     float trashFellaTimer=0;
+
+    public float groundSurfaceY;
 
 
     
@@ -47,6 +52,7 @@ public class GameController : MonoBehaviour
     public Camera myCamera;
     public Transform playerTransform, bossTransform;
     public BossController bossController;
+    public MagnumRevolverGraphicController magnumRevolver;
 
 
 
@@ -56,7 +62,9 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
-        
+        # if UNITY_ADROID 
+            uIController.OrderForMobileControllActivation();
+        #endif
     }
 
     
@@ -67,14 +75,16 @@ public class GameController : MonoBehaviour
                 if(isTrashTruckFellaOnField){
                     isTrashTruckFellaOnField = false;
                     isPlayModeOn = false;
-                    trashPacketStillOnField = trashPacketDroped - trashPacketSweeped;
 
                     trashBoxDropedTotal += trashBoxDroped;
                     trashBoxShotDownTotal += trashBoxShotDown;
                     trashPacketDropedTotal += trashPacketDroped;
                     trashPacketSweepedTotal += trashPacketSweeped;
                     bulletsFiredTotal += bulletsFired;
+                    bulletsHeavyFiredTotal += bulletsHeavyFirred;
 
+                    trashPacketStillOnField = trashPacketDropedTotal - trashPacketSweepedTotal;
+                    
                     uIController.CommandToShowLevelResults();
                 }
             }
@@ -105,7 +115,7 @@ public class GameController : MonoBehaviour
             trashPacketDroped=0;
             trashPacketSweeped=0;
             bulletsFired = 0;
-            //CommandStartALevel();
+            bulletsHeavyFirred = 0;
             uIController.CommandToSetALevel();
         }else{
             uIController.CommandEndGameWictory();
@@ -121,6 +131,8 @@ public class GameController : MonoBehaviour
         spawnControll.CommandSpawnABossFromLevelDescription();
         soundController.CommandPlayInGameMusic();
         uIController.OrderToActivateHud(true);
+        uIController.poluttionMystControll.CommandActivatePolutionPanel(true);
+        magnumRevolver.ChangeOnBulletsInChamber();
     }
 
     public void CommandToStartFight(){
@@ -156,6 +168,17 @@ public class GameController : MonoBehaviour
     }
 
 
+    public void CommandPausingTheGame(bool whatToDo){
+        if(whatToDo){
+            isGamePaused = true;
+            Time.timeScale = 0;
+        }else{
+            isGamePaused = false;
+            Time.timeScale = 1;
+        }
+    }
+
+
     public void OperationClearData(){
         levelCurrent = 0;
         trashBoxDroped=0;
@@ -164,6 +187,7 @@ public class GameController : MonoBehaviour
         trashPacketSweeped=0;
         trashPacketStillOnField=0;
         bulletsFired = 0;
+        bulletsHeavyFirred = 0;
 
         bossesDestroyed=0;
         trashBoxDropedTotal=0;
@@ -171,6 +195,7 @@ public class GameController : MonoBehaviour
         trashPacketDropedTotal=0;
         trashPacketSweepedTotal=0;
         bulletsFiredTotal=0;
+        bulletsHeavyFiredTotal=0;
     }
 
     public void OperationAddSweapedTrashPacked(int number){trashPacketSweeped += number;}

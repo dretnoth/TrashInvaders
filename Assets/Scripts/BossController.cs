@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     public bool isMovingLeft = true, isDeath=false,
         isAproachingBatlefield=false, isFigthing= false, isFalling=false, 
         isEscaping=false, isBreakingApart=false;
-    public int hitPointCurrent=100, trashToDrop=50, dustDrop=300;
+    public int hitPointOriginal=100, hitPointCurrent=100, trashToDrop=50, dustDrop=300;
 
     public bool isUsingSingleBoxDropBattleTechnique;
     public bool isUsingTetrisTechnique;
@@ -48,6 +48,7 @@ public class BossController : MonoBehaviour
         if(controll == null) controll = GameController.controll;
         maxTetrisBlock = aviableBlocks.Length;
         bombTimer = Random.Range(bombIntervalMin, bombIntervalMax);
+        hitPointOriginal = hitPointCurrent;
     }
 
     
