@@ -142,6 +142,7 @@ MonoBehaviour:
   isFalling: 0
   isEscaping: 0
   isBreakingApart: 0
+  hitPointOriginal: 100
   hitPointCurrent: 300
   trashToDrop: 100
   dustDrop: 600
@@ -167,7 +168,7 @@ MonoBehaviour:
   - {r: 1, g: 0.56078434, b: 0, a: 1}
   - {r: 0.72882366, g: 0, b: 1, a: 1}
   - {r: 0.33530614, g: 0.43414712, b: 0.5188679, a: 1}
-  myOwnColor: {r: 0.85098046, g: 0.8470589, b: 0.83921576, a: 1}
+  myOwnColor: {r: 0.92549026, g: 0.7294118, b: 0.2784314, a: 1}
   controll: {fileID: 0}
   myRigidbody: {fileID: 3590665199701363358}
   myCollider: {fileID: 394896427376144987}

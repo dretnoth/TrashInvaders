@@ -11,6 +11,7 @@ public class SoundController : MonoBehaviour
     public AudioSource audioSRooster, audioSCheer, audioSYouLost, audioSYouWin, 
         audioSExplosion, audioSPaper;
     public AudioSource audioButtonHiglight, audioButtonPress, audioButtonSwithc;
+    public AudioSource[] poopAudioClips;
     public AudioClip[] musicAudioClips, uiButonHighlightACs, uiButtonPressACs,
         uiButtonSwitchACs;
     public int musicInPlay;
@@ -76,6 +77,11 @@ public class SoundController : MonoBehaviour
         audioButtonSwithc.Play();
     }
 
+    public void CommandPLayPoopSound(){
+        int chosenOne = (int)Random.Range(0,poopAudioClips.Length-1);
+        poopAudioClips[chosenOne].Play();
+    }
+
 
     public void CommandAudioVolumeCheckUp(){
         musicMenuAS.volume = musicVolumeValue;
@@ -92,6 +98,12 @@ public class SoundController : MonoBehaviour
         audioButtonHiglight.volume = sfxVolumeValue;
         audioButtonPress.volume = sfxVolumeValue;
         audioButtonSwithc.volume = sfxVolumeValue;
+
+        for (int i = 0; i < poopAudioClips.Length; i++)
+        {
+            poopAudioClips[i].volume = sfxVolumeValue;
+
+        }
 
         if(gameController.playerTransform != null){
             gameController.playerTransform.GetComponent<PlayerController>()

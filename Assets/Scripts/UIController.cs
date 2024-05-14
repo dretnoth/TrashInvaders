@@ -236,8 +236,7 @@ public class UIController : MonoBehaviour
         soundController.CommandPlayButtonPress();
         endWictoryPanel.gameObject.SetActive(false);
         control.isWictory = false;
-        //delete after testing i add the end newspaper article
-        //OrderActivateMainMenu(true);
+        soundController.CommandPlayAMenuMusic();
         ButtonToOperateCredits(true);
         newsPaperController.OrderActivateFronNewsPaper(true, 1);
     }

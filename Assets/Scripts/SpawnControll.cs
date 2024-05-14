@@ -8,10 +8,12 @@ public class SpawnControll : MonoBehaviour
     public GameObject prefabPlayerTrashTruck;
     public GameObject prefabBullet, prefabHeavyBullet;
     public GameObject prefabBomb;
+    public GameObject prefabMissle;
     public GameObject prefabTrashBlock, prefabTrashPacket;
     public GameObject[] prefabBoss;
     public GameObject prefabTrashTruckFella;
     public GameObject prefabExplosion, prefabGroundExplosion;
+    public GameObject prefabBlackPuff, prefabWhitePuff;
 
 
 
@@ -23,6 +25,8 @@ public class SpawnControll : MonoBehaviour
     public List<Transform> listOfTrashPackets = new List<Transform>();
     public List<Transform> listOfExplosions = new List<Transform>();
     public List<Transform> listOfGroundExplosions = new List<Transform>();
+    public List<Transform> listOfBlackPuffs = new List<Transform>();
+    public List<Transform> listOfWhitePuffs = new List<Transform>();
 
 
     [Header("References")]
@@ -157,7 +161,6 @@ public class SpawnControll : MonoBehaviour
         bool isFounded = false;
         int lenghtOfList = listOfTrashPackets.Count;
         Transform packetTransform = null;
-        detectedSpawns++;
         
         for(int i = 0; i < lenghtOfList; i++) {
             if(!isFounded){
@@ -184,11 +187,10 @@ public class SpawnControll : MonoBehaviour
     }
 
 
-     public void CommandToSpawnAExplosion(Vector3 pos){
+    public void CommandToSpawnAExplosion(Vector3 pos){
         bool isFounded = false;
         int lenghtOfList = listOfExplosions.Count;
         Transform myTransform = null;
-        detectedSpawns++;
         
         for(int i = 0; i < lenghtOfList; i++) {
             if(!isFounded){
@@ -209,14 +211,14 @@ public class SpawnControll : MonoBehaviour
         myTransform.gameObject.SetActive(true);
         myTransform.transform.position = pos;
         myTransform.transform.rotation = Quaternion.Euler(0,0,Random.Range(0,360));
+        controller.soundController.CommandPLayPoopSound();
      }
 
 
-     public void CommandToSpawnAGroundExplosion(Vector3 pos){
+    public void CommandToSpawnAGroundExplosion(Vector3 pos){
         bool isFounded = false;
         int lenghtOfList = listOfGroundExplosions.Count;
         Transform myTransform = null;
-        detectedSpawns++;
         
         for(int i = 0; i < lenghtOfList; i++) {
             if(!isFounded){
@@ -235,8 +237,61 @@ public class SpawnControll : MonoBehaviour
         }
 
         myTransform.gameObject.SetActive(true);
-        myTransform.transform.position = pos;        
-     }
+        myTransform.transform.position = pos;  
+        controller.soundController.CommandPlayExplosion();      
+    }
+
+
+    public void CommandToSpawnABlackPuff(Vector3 pos){
+        bool isFounded = false;
+        int lenghtOfList = listOfBlackPuffs.Count;
+        Transform myTransform = null;
+        
+        for(int i = 0; i < lenghtOfList; i++) {
+            if(!isFounded){
+                if(listOfBlackPuffs[i].gameObject.activeInHierarchy == false){
+                    myTransform = listOfBlackPuffs[i];
+                    isFounded = true;
+                }
+            }
+        }
+
+        if(!isFounded){
+            GameObject go = (GameObject)Instantiate(prefabBlackPuff, Vector3.zero, Quaternion.identity);
+            myTransform = go.transform;
+            listOfBlackPuffs.Add(myTransform);            
+            go.transform.SetParent(folderForVisuals);
+        }
+
+        myTransform.gameObject.SetActive(true);
+        myTransform.transform.position = pos;    
+    }
+
+
+    public void CommandToSpawnAWhitePuff(Vector3 pos){
+        bool isFounded = false;
+        int lenghtOfList = listOfWhitePuffs.Count;
+        Transform myTransform = null;
+        
+        for(int i = 0; i < lenghtOfList; i++) {
+            if(!isFounded){
+                if(listOfWhitePuffs[i].gameObject.activeInHierarchy == false){
+                    myTransform = listOfWhitePuffs[i];
+                    isFounded = true;
+                }
+            }
+        }
+
+        if(!isFounded){
+            GameObject go = (GameObject)Instantiate(prefabWhitePuff, Vector3.zero, Quaternion.identity);
+            myTransform = go.transform;
+            listOfWhitePuffs.Add(myTransform);            
+            go.transform.SetParent(folderForVisuals);
+        }
+
+        myTransform.gameObject.SetActive(true);
+        myTransform.transform.position = pos;    
+    }
 
 
    
@@ -282,6 +337,14 @@ public class SpawnControll : MonoBehaviour
     }
 
 
+    public void CommandToSpanwAMissle(bool isTruck, bool isJetFighter){
+        GameObject go = null;
+        if(isTruck){
+            go = (GameObject)Instantiate(
+                prefabMissle, controller.playerTransform.position, Quaternion.identity);
+            go.GetComponent<Missle>().GetTarget();
+        }
+    }
    
 
 
@@ -321,7 +384,7 @@ public class SpawnControll : MonoBehaviour
             go.SetActive(false);
         }
 
-        for(int i = 0; i < 300; i++) {
+        for(int i = 0; i < 400; i++) {
             go = (GameObject)Instantiate(prefabTrashPacket, Vector3.zero, Quaternion.identity);
             listOfTrashPackets.Add(go.transform);
             go.transform.SetParent(folderForTrash);
@@ -338,6 +401,20 @@ public class SpawnControll : MonoBehaviour
         for(int i = 0; i < 10; i++) {
             go = (GameObject)Instantiate(prefabGroundExplosion, Vector3.zero, Quaternion.identity);
             listOfGroundExplosions.Add(go.transform);
+            go.transform.SetParent(folderForVisuals);
+            go.SetActive(false);
+        }
+
+        for(int i = 0; i < 50; i++) {
+            go = (GameObject)Instantiate(prefabBlackPuff, Vector3.zero, Quaternion.identity);
+            listOfBlackPuffs.Add(go.transform);
+            go.transform.SetParent(folderForVisuals);
+            go.SetActive(false);
+        }
+
+        for(int i = 0; i < 50; i++) {
+            go = (GameObject)Instantiate(prefabWhitePuff, Vector3.zero, Quaternion.identity);
+            listOfWhitePuffs.Add(go.transform);
             go.transform.SetParent(folderForVisuals);
             go.SetActive(false);
         }
