@@ -1,4 +1,7 @@
 Library
 UnityEngine.VirtualTexturingModule.dll
-Unity.VisualScripting.Core.csproj
 *.csproj
+/Temp
+*.csproj
+/Logs
+*.json

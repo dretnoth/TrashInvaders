@@ -20,7 +20,7 @@ public class Bomb : MonoBehaviour
         if(other.tag == "Player"){
             iamDone = true;
             myplayer =  other.GetComponent<PlayerController>();
-            if(myplayer != null) myplayer.GotHitByABomb();
+            if(myplayer != null) myplayer.CommandGotHitByABomb();
             myTrashTruckFella = other.GetComponent<TrashTruckFella>();
             if(myTrashTruckFella != null) myTrashTruckFella.GotHitByABomb();
         }

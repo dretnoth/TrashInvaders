@@ -6,7 +6,7 @@ public class SmokePuff : MonoBehaviour
 {
     public SpawnControll spawnControll;
     float lifeTimer=0; 
-    public float lifeInterval=1f;
+    public float lifeInterval=1f, lifeIntervalMin=0.5f, lifeIntervalMax=2.5f;
     Vector3 myRotation = new Vector3 (0,0,0);
     public SpriteRenderer spriteRenderer;
     public Sprite[] mySprites;
@@ -30,6 +30,7 @@ public class SmokePuff : MonoBehaviour
 
     void Reset(){
         lifeTimer = 0;
+        lifeInterval = Random.Range(lifeIntervalMin, lifeIntervalMax);
         myRotation.z = Random.Range(0,360);
         this.transform.Rotate(myRotation);
         spriteRenderer.sprite = mySprites[

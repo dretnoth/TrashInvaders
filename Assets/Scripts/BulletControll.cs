@@ -18,7 +18,7 @@ public class BulletControll : MonoBehaviour
         transform.Translate(Vector3.up * speedOfBullet * Time.deltaTime);
         
         lifeTimer -= Time.deltaTime;
-        if(lifeTimer < 0){}
+        if(lifeTimer < 0){Deactivate();}
     }
 
     public void Deactivate(){
@@ -36,8 +36,9 @@ public class BulletControll : MonoBehaviour
 
         if(other.tag == "Box"){
             Box otherBox = other.GetComponent<Box>();
+            if(otherBox != null)
             if(otherBox.isBox){
-                otherBox.GotHip(damagePower);
+                otherBox.CommandGotHit(damagePower);
                 isBulletDone = true;
             }
         }

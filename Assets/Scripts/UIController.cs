@@ -62,6 +62,9 @@ public class UIController : MonoBehaviour
     public Transform hudDisplayPanel;
     public TMP_Text bossHPText; int bossHPValue=0; 
     public Image bossHPBarImage; float bossHpPercentage=1f;
+    public Image trashColectedImage;
+    public TMP_Text trashColectedText; string trashColectedMesage="";
+    float trashColectedFillValue=0;
 
 
     [Header("Android Controll")]
@@ -296,6 +299,7 @@ public class UIController : MonoBehaviour
         }
     }
 
+   
 
     public void OrderForMobileControllActivation(){
         bool thisValue = !control.isAndroidControlActive;
@@ -312,6 +316,20 @@ public class UIController : MonoBehaviour
 
 
 
+
+    public void CommandUpdateCollectedTrashInformations(){
+        if(control.playerController != null){
+            trashColectedMesage = control.playerController.collectedTrashCurrent 
+                +"/"+ control.playerController.collectedTrashCapacity;
+            trashColectedFillValue = control.playerController.collectedTrashCurrent 
+                / control.playerController.collectedTrashCapacity;
+        }else{
+            trashColectedMesage = "0";
+            trashColectedFillValue = 0;
+        }
+        trashColectedText.text = trashColectedMesage;
+        trashColectedImage.fillAmount = trashColectedFillValue;
+    }
 
     public void CommandToShowAnoucment(string theString){
         screenAnoucmentTextField.text = theString;

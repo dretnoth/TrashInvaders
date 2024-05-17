@@ -11,7 +11,8 @@ public class SpawnControll : MonoBehaviour
     public GameObject prefabMissle;
     public GameObject prefabTrashBlock, prefabTrashPacket;
     public GameObject[] prefabBoss;
-    public GameObject prefabTrashTruckFella;
+    public GameObject prefabTrashTruckFella, prefabArmyCar;
+    public GameObject prefabSupplyPlane, prefabSupplyBox;
     public GameObject prefabExplosion, prefabGroundExplosion;
     public GameObject prefabBlackPuff, prefabWhitePuff;
 
@@ -65,6 +66,7 @@ public class SpawnControll : MonoBehaviour
             go.transform.SetParent(folderForBullets);
         }
 
+        bulletTransform.transform.rotation = angle;
         bulletTransform.gameObject.SetActive(true);
         bulletTransform.transform.position = pos;
         bulletTransform.transform.rotation = angle;
@@ -301,6 +303,8 @@ public class SpawnControll : MonoBehaviour
         GameObject player = (GameObject) Instantiate(prefabPlayerTrashTruck, 
             new Vector3(0,controller.groundSurfaceY,0), Quaternion.identity);
         controller.playerTransform = player.transform;
+        if(controller.playerController != null)
+            controller.playerController = player.GetComponent<PlayerController>();
     }
 
 
@@ -334,16 +338,43 @@ public class SpawnControll : MonoBehaviour
         }
         controller.trashTruckSweeping +=1;
         controller.isTrashTruckFellaOnField = true;
+        controller.soundController.CommandPlayTruckHonk();
     }
 
 
-    public void CommandToSpanwAMissle(bool isTruck, bool isJetFighter){
-        GameObject go = null;
-        if(isTruck){
-            go = (GameObject)Instantiate(
-                prefabMissle, controller.playerTransform.position, Quaternion.identity);
-            go.GetComponent<Missle>().GetTarget();
+    public void CommandSpawnASupplyPlane(){
+        if(prefabSupplyPlane != null){
+            Vector3 pos = new Vector3 (-9, 5, 0);
+            GameObject go = (GameObject)Instantiate(prefabSupplyPlane, pos, Quaternion.identity);
+            go.GetComponent<SupplyPlane>().CommandSetFlyDirectionToRight();
         }
+    }
+
+    public void CommandSpawnASupplyCrate(Vector3 pos){
+        GameObject go = (GameObject)Instantiate(prefabSupplyBox, pos, Quaternion.identity);
+    }
+
+    public void CommandSpawnAArmyCar(){
+        Vector3 pos = new Vector3 (9, controller.groundSurfaceY, 0);
+        GameObject go = (GameObject)Instantiate(prefabArmyCar, pos, Quaternion.identity);
+        
+    }
+
+
+    public void CommandToSpanwAMissle(bool isTruck, bool isJetFighter, bool isCar, Vector3 nexpos){
+        GameObject go = null;
+        Vector3 pos= Vector3.zero;
+        Quaternion quaternionRotation = Quaternion.identity;
+        if(isTruck){
+            pos = controller.playerTransform.position;
+        }
+        if(isJetFighter){}
+        if(isCar){
+            pos = nexpos;
+        }
+        go = (GameObject)Instantiate(prefabMissle, pos, quaternionRotation);
+        go.GetComponent<Missle>().GetTarget();
+        
     }
    
 

@@ -33,6 +33,9 @@ public class GameController : MonoBehaviour
     float trashFellaTimer=0;
 
     public float groundSurfaceY;
+    public float supplyDropIntervalMin= 30, supplyDropIntervalMax= 150, 
+        supplyDropInervalCurrent=0;
+    float supplyDropTimer=0;
 
 
     
@@ -51,6 +54,7 @@ public class GameController : MonoBehaviour
     public SoundController soundController;
     public Camera myCamera;
     public Transform playerTransform, bossTransform;
+    public PlayerController playerController;
     public BossController bossController;
     public MagnumRevolverGraphicController magnumRevolver;
 
@@ -65,6 +69,8 @@ public class GameController : MonoBehaviour
         # if UNITY_ADROID 
             uIController.OrderForMobileControllActivation();
         #endif
+
+        OperationSetSupplyDropInterval();
     }
 
     
@@ -95,6 +101,13 @@ public class GameController : MonoBehaviour
             if(trashFellaTimer > trashFellaInterval){
                 trashFellaTimer = 0;
                 spawnControll.CommandSpawnATrashTruckFella();
+            }
+
+            supplyDropTimer +=Time.deltaTime;
+            if(supplyDropTimer > supplyDropInervalCurrent){
+                supplyDropTimer = 0;
+                OperationSetSupplyDropInterval();
+                spawnControll.CommandSpawnASupplyPlane();
             }
         }
     }
@@ -128,17 +141,25 @@ public class GameController : MonoBehaviour
         if(playerTransform == null){
             spawnControll.CommandSpawnNewPlayer();
         }
+        if(playerController == null){
+            if(playerTransform != null)
+                playerController = playerTransform.GetComponent<PlayerController>();
+        }
         spawnControll.CommandSpawnABossFromLevelDescription();
         soundController.CommandPlayInGameMusic();
+        soundController.CommandPlayRooster();
+        playerController.startEngineAS.Play();
+        playerController.CommandForceMagnumReload();
         uIController.OrderToActivateHud(true);
         uIController.poluttionMystControll.CommandActivatePolutionPanel(true);
+        uIController.CommandUpdateCollectedTrashInformations();
         magnumRevolver.ChangeOnBulletsInChamber();
     }
 
     public void CommandToStartFight(){
         isFightOn = true;
         uIController.CommandToShowAnoucment("Fight!");
-        soundController.CommandPlayRooster();
+        soundController.CommandPlayReadyFight();
     }
 
     public void CommandBossWasShutDown(){
@@ -205,6 +226,10 @@ public class GameController : MonoBehaviour
     public void OperationAddSpawnedTrashBox(){trashBoxDroped++;}
 
     public void OperationAddSpawnedTrashPacklet(){trashPacketDroped++;}
+
+    public void OperationSetSupplyDropInterval(){
+        supplyDropInervalCurrent = Random.Range(supplyDropIntervalMin, supplyDropIntervalMax);
+    }
    
 
 }

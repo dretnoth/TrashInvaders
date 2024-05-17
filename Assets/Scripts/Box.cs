@@ -40,7 +40,7 @@ public class Box : MonoBehaviour
     }
 
 
-    //void OnTriggerEnter2D(Collider2D other)
+    
     private void OnCollisionEnter2D(Collision2D other) 
     {       
         if(isBox && !isBoxDone ){
@@ -67,13 +67,16 @@ public class Box : MonoBehaviour
             if(other.gameObject.tag == "Trash")
                 if(other.gameObject.GetComponent<Box>().isOnGround == true)
                     isOnGround = true;
+            if(other.gameObject.tag == "Supply")
+                if(other.gameObject.GetComponent<SupplyCrate>().isOnGround == true)
+                    isOnGround = true;
         }
     
 
     }
 
 
-    public void GotHip(int damage){
+    public void CommandGotHit(int damage){
         hitPointCurrent -= damage;
             if(hitPointCurrent <= 0){
                 CommandForBoxToBreak(true, false);

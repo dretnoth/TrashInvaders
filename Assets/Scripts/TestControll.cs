@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestControll : MonoBehaviour
 {
     public bool isTestingOwerdrive;
-    public bool isMissleTestFromTruck;
+    public bool isMissleTestFromTruck, isSupplyPlane, isArmyCar, isFastFire;
     public GameController gameController;
     
     void Start()
@@ -15,7 +15,7 @@ public class TestControll : MonoBehaviour
         if(isTestingOwerdrive){
             gameController.isTestingModeOn = true;
             Debug.Log($"Test script is on");
-        }
+        }        
     }
 
     
@@ -30,7 +30,18 @@ public class TestControll : MonoBehaviour
 
     public void Test(){
         if(isMissleTestFromTruck){
-            gameController.spawnControll.CommandToSpanwAMissle(true, false);
+            gameController.spawnControll.CommandToSpanwAMissle(
+                true, false, false, Vector3.zero);
+        }
+        if(isSupplyPlane){
+            gameController.spawnControll.CommandSpawnASupplyPlane();
+        }
+        if(isArmyCar){
+            gameController.spawnControll.CommandSpawnAArmyCar();
+        }
+        if(isFastFire){
+            gameController.playerController.fastFireAmooReserve +=50;
+            gameController.playerController.isFastFireOn = true;
         }
     }
 }

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptionMain: 'A loitering Alien ship was detected above yours work location.
     Its seems that it carry a Trash Block containers. Destroy them to reduce the
-    incoming trash. Use left to right to positing the car. Use Space-bar to Shot
-    a powerful ammunition when it will be ready. '
+    incoming trash. Use left to right to positing the car. Use "Space-bar" to Shot
+    a powerful magnum ammunition, "Shift" to collect trash. On android: If controlls
+    dont show up activate them in settings.'
   descriptionSkills: Neighborhood watch reports, that we can expect at last 50 drops
     of trash Boxes.
   PrefabBoss: {fileID: 5337471687097330195, guid: 6e09611dac50bc04daf2defd262d21e7, type: 3}

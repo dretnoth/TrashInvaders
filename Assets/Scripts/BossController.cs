@@ -22,6 +22,8 @@ public class BossController : MonoBehaviour
     public float bombIntervalMin= 0.5f, bombIntervalMax = 5f;
     float dropTimer = 0, dustTimer=0, bombTimer=0;
 
+    float percentualDamageRate=1,  flufTimer=0;
+
     public Transform trashSpawningPosition;
     public Color[] colorToChose;
     public Color myOwnColor;
@@ -49,6 +51,7 @@ public class BossController : MonoBehaviour
         maxTetrisBlock = aviableBlocks.Length;
         bombTimer = Random.Range(bombIntervalMin, bombIntervalMax);
         hitPointOriginal = hitPointCurrent;
+        percentualDamageRate = 1;
     }
 
     
@@ -132,6 +135,11 @@ public class BossController : MonoBehaviour
             }
         }
 
+        flufTimer += Time.deltaTime;
+        if(flufTimer > percentualDamageRate){
+            flufTimer = 0;
+            SpawnAPuff();
+        }
 
         transform.position = pos;
     }
@@ -194,6 +202,17 @@ public class BossController : MonoBehaviour
         }
     }
 
+    void SpawnAPuff(){
+        Vector3 pos = transform.position;
+        pos.x += Random.Range(-1.5f, 1.5f);
+        pos.y += Random.Range(-1.5f, 1.5f);
+        bool isblack = false;
+        if(Random.Range(0,2f) > 1f){isblack = true;}
+        if(isblack)
+            controll.spawnControll.CommandToSpawnABlackPuff(pos);
+        else controll.spawnControll.CommandToSpawnAWhitePuff(pos);  
+    }
+
 
     public void GotHit(int damage, Vector3 hitPos){
         hitPointCurrent -= damage;
@@ -207,13 +226,17 @@ public class BossController : MonoBehaviour
                 myCollider.isTrigger = false;
                 controll.CommandBossWasShutDown();
             }
+        }        
 
             if(damage > 1){
                 controll.spawnControll.CommandToSpawnATrashPacklet(
                     hitPos, Quaternion.identity, myOwnColor);
                 controll.spawnControll.CommandToSpawnAExplosion(hitPos);
             }
-        }        
+
+        percentualDamageRate = (float)hitPointCurrent / (float)hitPointOriginal;
+        if(percentualDamageRate < 0.05f) percentualDamageRate = 0.05f;
+        
     }
 
 
@@ -232,6 +255,18 @@ public class BossController : MonoBehaviour
             }
             controll.soundController.CommandPlayExplosion();
             controll.spawnControll.CommandToSpawnAGroundExplosion(transform.position);
+            for(int i = 0; i < 10; i++) {
+                pos = transform.position;
+                pos.x += Random.Range(-2f, 2f); 
+                pos.y += Random.Range(0.5f, 3f);
+                controll.spawnControll.CommandToSpawnABlackPuff(pos);
+            }
+            for(int i = 0; i < 5; i++) {
+                pos = transform.position;
+                pos.x += Random.Range(-2f, 2f); 
+                pos.y += Random.Range(0.5f, 3f);
+                controll.spawnControll.CommandToSpawnAWhitePuff(pos);
+            }
             Destroy(gameObject);
         }
     }

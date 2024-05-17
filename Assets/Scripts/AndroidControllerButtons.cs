@@ -9,7 +9,7 @@ public class AndroidControllerButtons : MonoBehaviour, IPointerDownHandler, IPoi
     public GameController controller;
     bool isPressed = false;
     public bool isLeftDirection=false, isRightDirection=false,
-        isHeavyBulletFire=false, isSpecial=false;
+        isHeavyBulletFire=false, isForTrashCollecting=false;
     PlayerController playerController;
     
     void Start()
@@ -34,8 +34,8 @@ public class AndroidControllerButtons : MonoBehaviour, IPointerDownHandler, IPoi
                 if(isHeavyBulletFire)
                 playerController.CommandFireSequence();
                 
-                if(isSpecial)
-                Debug.Log($"Special not set yet!");
+                if(isForTrashCollecting)
+                playerController.CommandColectingNearlyTrash();
             }
         }
     }
