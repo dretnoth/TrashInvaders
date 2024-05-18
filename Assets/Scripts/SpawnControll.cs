@@ -9,7 +9,7 @@ public class SpawnControll : MonoBehaviour
     public GameObject prefabBullet, prefabHeavyBullet;
     public GameObject prefabBomb;
     public GameObject prefabMissle;
-    public GameObject prefabTrashBlock, prefabTrashPacket;
+    public GameObject prefabTrashBlock, prefabTrashPacket, prefabTrashCan;
     public GameObject[] prefabBoss;
     public GameObject prefabTrashTruckFella, prefabArmyCar;
     public GameObject prefabSupplyPlane, prefabSupplyBox;
@@ -24,6 +24,7 @@ public class SpawnControll : MonoBehaviour
     public List<Transform> listOfBombs = new List<Transform>();
     public List<Transform> listOfTrashBoxes = new List<Transform>();
     public List<Transform> listOfTrashPackets = new List<Transform>();
+    public List<Transform> listOfTrashCans = new List<Transform>();
     public List<Transform> listOfExplosions = new List<Transform>();
     public List<Transform> listOfGroundExplosions = new List<Transform>();
     public List<Transform> listOfBlackPuffs = new List<Transform>();
@@ -186,6 +187,35 @@ public class SpawnControll : MonoBehaviour
         packetTransform.GetComponent<Box>().SetMe(color);
 
         controller.OperationAddSpawnedTrashPacklet();
+    }
+
+
+    public void CommandToSpawnATrashCan(Vector3 pos){
+        bool isFounded = false;
+        int lenghtOfList = listOfTrashCans.Count;
+        Transform myTransform = null;
+        
+        for(int i = 0; i < lenghtOfList; i++) {
+            if(!isFounded){
+                if(listOfTrashCans[i].gameObject.activeInHierarchy == false){
+                    myTransform = listOfTrashCans[i];
+                    isFounded = true;
+                }
+            }
+        }
+
+        if(!isFounded){
+            GameObject go = (GameObject)Instantiate(prefabTrashCan, Vector3.zero, Quaternion.identity);
+            myTransform = go.transform;
+            listOfTrashPackets.Add(myTransform);            
+            go.transform.SetParent(folderForTrash);
+        }
+
+        myTransform.gameObject.SetActive(true);
+        myTransform.transform.position = pos;
+        myTransform.transform.rotation = Quaternion.Euler (0, 0, Random.Range(0,360));
+        
+        controller.OperationAddSpawnedTrashCan();
     }
 
 
@@ -374,7 +404,7 @@ public class SpawnControll : MonoBehaviour
         }
         go = (GameObject)Instantiate(prefabMissle, pos, quaternionRotation);
         go.GetComponent<Missle>().GetTarget();
-        
+        controller.OperationFirredMissle();
     }
    
 
@@ -384,7 +414,7 @@ public class SpawnControll : MonoBehaviour
         GameObject go = null;
         Transform bulletTransform = null;
         
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 50; i++) {
             go = (GameObject)Instantiate(prefabBullet, Vector3.zero, Quaternion.identity);
             bulletTransform = go.transform;
             listOfBullets.Add(bulletTransform);
@@ -408,7 +438,7 @@ public class SpawnControll : MonoBehaviour
             go.SetActive(false);
         }
         
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 30; i++) {
             go = (GameObject)Instantiate(prefabTrashBlock, Vector3.zero, Quaternion.identity);
             listOfTrashBoxes.Add(go.transform);
             go.transform.SetParent(folderForTrash);
@@ -418,6 +448,13 @@ public class SpawnControll : MonoBehaviour
         for(int i = 0; i < 400; i++) {
             go = (GameObject)Instantiate(prefabTrashPacket, Vector3.zero, Quaternion.identity);
             listOfTrashPackets.Add(go.transform);
+            go.transform.SetParent(folderForTrash);
+            go.SetActive(false);
+        }
+
+        for(int i = 0; i < 30; i++) {
+            go = (GameObject)Instantiate(prefabTrashCan, Vector3.zero, Quaternion.identity);
+            listOfTrashCans.Add(go.transform);
             go.transform.SetParent(folderForTrash);
             go.SetActive(false);
         }

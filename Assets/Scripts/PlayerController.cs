@@ -141,8 +141,7 @@ public class PlayerController : MonoBehaviour
                         isMovingLeft = false;
                         mySpriteRenderer.flipX = true;
                         gameController.OperationAddSweapedTrashPacked(collectedTrashCurrent);
-                        collectedTrashCurrent = 0;
-                        gameController.uIController.CommandUpdateCollectedTrashInformations();
+                        OperationDropCoolectedTrash();
                         startEngineAS.Play();
                     }
                 }
@@ -239,7 +238,9 @@ public class PlayerController : MonoBehaviour
         if(!isStunned && !isBussy){
             if(trashCollectingtimer < 0){
                 trashCollectingtimer = colectingTrashInterval;
-                RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, Vector2.one);
+                Vector3 myPosition =transform.position;
+                myPosition.y -=0.4f;
+                RaycastHit2D[] hit = Physics2D.RaycastAll(myPosition, Vector2.one);
                 bool isDone = false;
                 if(hit != null){
                     for(int i = 0; i < hit.Length; i++) {
@@ -279,6 +280,11 @@ public class PlayerController : MonoBehaviour
         if(fastFireAmooReserve <= 0){
             isFastFireOn = false;
         }
+    }
+
+    public void OperationDropCoolectedTrash(){
+        collectedTrashCurrent = 0;
+        gameController.uIController.CommandUpdateCollectedTrashInformations();
     }
 
 

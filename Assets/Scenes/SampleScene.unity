@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2715,6 +2715,7 @@ RectTransform:
   - {fileID: 1963537519}
   - {fileID: 2091889815}
   - {fileID: 8325668}
+  - {fileID: 488473959}
   m_Father: {fileID: 1045304318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5524,6 +5525,161 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &488473955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488473959}
+  - component: {fileID: 488473958}
+  - component: {fileID: 488473956}
+  - component: {fileID: 488473957}
+  m_Layer: 5
+  m_Name: Missle Fired T
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &488473956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488473955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &488473957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488473955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!222 &488473958
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488473955}
+  m_CullTransparentMesh: 1
+--- !u!224 &488473959
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488473955}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 275909750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 376.74347, y: -330.132}
+  m_SizeDelta: {x: 733.4869, y: 36.6383}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &491626165
 GameObject:
   m_ObjectHideFlags: 0
@@ -6883,6 +7039,7 @@ MonoBehaviour:
   levelResultPolutionRate: {fileID: 1963537522}
   levelResultBulletFiredText: {fileID: 2091889813}
   levelResultBulletHeavyFiredText: {fileID: 8325665}
+  levelResultMissleFiredText: {fileID: 488473956}
   endWictoryText: {fileID: 294505183}
   buttonMmSwitchAcText: {fileID: 812172372}
   screenAnoucmentInterval: 2
@@ -6925,7 +7082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6c595695172e46b70a2e621a3c4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testValue: 2
+  testValue: 3
   isTestingModeOn: 0
   isGamePaused: 0
   isPlayModeOn: 0
@@ -6958,6 +7115,8 @@ MonoBehaviour:
   trashPacketSweepedTotal: 0
   bulletsFiredTotal: 0
   bulletsHeavyFiredTotal: 0
+  missleFired: 0
+  missleFiredTotal: 0
   trashTruckSweeping: 0
   trashFellaPeriodicalArriveBool: 1
   trashFellaInterval: 120
@@ -6975,6 +7134,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91ee05a603f9518448ce840c854f491a, type: 2}
   - {fileID: 11400000, guid: 4fbc2c68bb032f64eb22fd8974970798, type: 2}
   - {fileID: 11400000, guid: c79c91e148ca1f94cadddabf1804f614, type: 2}
+  - {fileID: 11400000, guid: ac24ebf20fc643e43b4ee8722ddeb782, type: 2}
   - {fileID: 11400000, guid: c17129664454e9f4996e71682498a508, type: 2}
   uIController: {fileID: 653333882}
   spawnControll: {fileID: 653333885}
@@ -7020,8 +7180,13 @@ MonoBehaviour:
   prefabMissle: {fileID: 7254511195798339462, guid: 889019da53390a14fb56e35e74bd143f, type: 3}
   prefabTrashBlock: {fileID: 1483693699127744470, guid: 61180a34d3b99ea41922751ffada66e8, type: 3}
   prefabTrashPacket: {fileID: 1152757645073757897, guid: e40bec47b5b878a4e80d9fb08322f549, type: 3}
+  prefabTrashCan: {fileID: 8287783395389790697, guid: 9137c6d263872514783044864a7c4107, type: 3}
   prefabBoss:
   - {fileID: 5337471687097330195, guid: 6e09611dac50bc04daf2defd262d21e7, type: 3}
+  - {fileID: 5337471687097330195, guid: c91eff56fd8834f41b126d2f5893480a, type: 3}
+  - {fileID: 5337471687097330195, guid: 8f7a5f823c5a4e242938df4debf9294c, type: 3}
+  - {fileID: 6442284567360040233, guid: 24df9944116d07f468027c65dc152aa4, type: 3}
+  - {fileID: 5337471687097330195, guid: c76dd5e37452ce44b88c09906501052f, type: 3}
   prefabTrashTruckFella: {fileID: 8237243994102827297, guid: 3762e454a15e7874db901d0dd80cb90d, type: 3}
   prefabArmyCar: {fileID: 8386048884100705065, guid: b533d79a0be698e4781962e5ec1c5f1a, type: 3}
   prefabSupplyPlane: {fileID: 186612760258240167, guid: b161e66c87d05aa4d980b828f2bb5615, type: 3}
@@ -7035,6 +7200,7 @@ MonoBehaviour:
   listOfBombs: []
   listOfTrashBoxes: []
   listOfTrashPackets: []
+  listOfTrashCans: []
   listOfExplosions: []
   listOfGroundExplosions: []
   listOfBlackPuffs: []

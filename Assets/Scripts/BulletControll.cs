@@ -43,6 +43,14 @@ public class BulletControll : MonoBehaviour
             }
         }
 
+        if(other.tag == "Can"){
+            Can otherBox = other.GetComponent<Can>();
+            if(otherBox != null){
+                otherBox.CommandGotHit(damagePower);
+                isBulletDone = true;
+            }
+        }
+
 
         if(isBulletDone){Deactivate();}
     }

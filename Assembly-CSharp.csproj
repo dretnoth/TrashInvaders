@@ -68,6 +68,8 @@
     <Compile Include="Assets\Scripts\BossController.cs" />
     <Compile Include="Assets\Scripts\NewsPaperController.cs" />
     <Compile Include="Assets\Scripts\SoundController.cs" />
+    <Compile Include="Assets\Scripts\SupplyPlane.cs" />
+    <Compile Include="Assets\Scripts\SupplyCrate.cs" />
     <Compile Include="Assets\Scripts\TestControll.cs" />
     <Compile Include="Assets\Scripts\Box.cs" />
     <Compile Include="Assets\Scripts\UIButtonHiglight.cs" />
@@ -75,6 +77,8 @@
     <Compile Include="Assets\Scripts\AndroidControllerButtons.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
+    <Compile Include="Assets\Scripts\ArmyCar.cs" />
+    <Compile Include="Assets\Scripts\Can.cs" />
     <Compile Include="Assets\Scripts\FriendlyBomb.cs" />
     <Compile Include="Assets\Scripts\MagnumRevolverGraphicController.cs" />
     <Compile Include="Assets\Scripts\Missle.cs" />

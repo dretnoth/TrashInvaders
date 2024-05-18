@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 394896427376144987}
   - component: {fileID: 907078333074444439}
   m_Layer: 8
-  m_Name: Boss 4 Container
+  m_Name: Boss Mid Container
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,19 +143,27 @@ MonoBehaviour:
   isEscaping: 0
   isBreakingApart: 0
   hitPointOriginal: 100
-  hitPointCurrent: 300
+  hitPointCurrent: 400
   trashToDrop: 100
   dustDrop: 600
+  combatMethodLeftToRight: 1
+  combatMethodRuller: 0
   isUsingSingleBoxDropBattleTechnique: 0
   isUsingTetrisTechnique: 1
   isUsingDustingTechnique: 1
   isDropingBombsTechnique: 1
+  isUsingCansTimedTechnique: 0
+  isUsingCansPositionTechnique: 0
   dropInterval: 1.75
   explodeInterval: 4.5
   dustIntervalMin: 0.25
   dustIntervalMax: 0.75
   bombIntervalMin: 0.5
   bombIntervalMax: 5
+  rullerStayIntervalMin: 2.5
+  rullerStayIntervalMax: 4
+  cansIntervalMin: 1.5
+  cansIntervalMax: 4.5
   trashSpawningPosition: {fileID: 7253956785104962757}
   colorToChose:
   - {r: 1, g: 1, b: 1, a: 1}

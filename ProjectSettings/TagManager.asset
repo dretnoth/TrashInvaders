@@ -10,6 +10,8 @@ TagManager:
   - Bag
   - Bomb
   - Ground
+  - Supply
+  - Can
   layers:
   - Default
   - TransparentFX

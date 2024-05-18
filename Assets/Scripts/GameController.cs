@@ -26,7 +26,8 @@ public class GameController : MonoBehaviour
     
     public int bossesDestroyed=0, bossLastHp=0;
     public int trashBoxDropedTotal=0, trashBoxShotDownTotal=0, trashPacketDropedTotal=0,
-        trashPacketSweepedTotal=0, bulletsFiredTotal=0, bulletsHeavyFiredTotal=0;
+        trashPacketSweepedTotal=0, bulletsFiredTotal=0, bulletsHeavyFiredTotal=0,
+        missleFired=0, missleFiredTotal=0;
     public int trashTruckSweeping=0;
 
     public bool trashFellaPeriodicalArriveBool; public float trashFellaInterval =120;
@@ -88,6 +89,7 @@ public class GameController : MonoBehaviour
                     trashPacketSweepedTotal += trashPacketSweeped;
                     bulletsFiredTotal += bulletsFired;
                     bulletsHeavyFiredTotal += bulletsHeavyFirred;
+                    missleFiredTotal += missleFired;
 
                     trashPacketStillOnField = trashPacketDropedTotal - trashPacketSweepedTotal;
                     
@@ -129,6 +131,7 @@ public class GameController : MonoBehaviour
             trashPacketSweeped=0;
             bulletsFired = 0;
             bulletsHeavyFirred = 0;
+            missleFired = 0;
             uIController.CommandToSetALevel();
         }else{
             uIController.CommandEndGameWictory();
@@ -186,6 +189,7 @@ public class GameController : MonoBehaviour
     public void CommandRunASweepOperation(){
         isEndOfTheLevel = true;
         spawnControll.CommandSpawnATrashTruckFella();
+        playerController.OperationDropCoolectedTrash();
     }
 
 
@@ -209,6 +213,7 @@ public class GameController : MonoBehaviour
         trashPacketStillOnField=0;
         bulletsFired = 0;
         bulletsHeavyFirred = 0;
+        missleFired = 0;
 
         bossesDestroyed=0;
         trashBoxDropedTotal=0;
@@ -217,6 +222,7 @@ public class GameController : MonoBehaviour
         trashPacketSweepedTotal=0;
         bulletsFiredTotal=0;
         bulletsHeavyFiredTotal=0;
+        missleFiredTotal = 0;
     }
 
     public void OperationAddSweapedTrashPacked(int number){trashPacketSweeped += number;}
@@ -226,6 +232,10 @@ public class GameController : MonoBehaviour
     public void OperationAddSpawnedTrashBox(){trashBoxDroped++;}
 
     public void OperationAddSpawnedTrashPacklet(){trashPacketDroped++;}
+
+    public void OperationAddSpawnedTrashCan(){trashBoxDroped++;}
+
+    public void OperationFirredMissle(){missleFired++;}
 
     public void OperationSetSupplyDropInterval(){
         supplyDropInervalCurrent = Random.Range(supplyDropIntervalMin, supplyDropIntervalMax);

@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
     public TMP_Text levelDescriptionLevelNumber, levelDescriptionMainText, levelDescriptionSkillsText;
     public TMP_Text levelResultLevelNumberText, leverResultBossText, levelResultBoxText, 
         levelResultPacketSweepedText, levelResultPacketOnFieldText, levelResultPolutionRate, 
-        levelResultBulletFiredText, levelResultBulletHeavyFiredText;
+        levelResultBulletFiredText, levelResultBulletHeavyFiredText, levelResultMissleFiredText;
     public TMP_Text endWictoryText;
     public TMP_Text buttonMmSwitchAcText;
 
@@ -374,7 +374,8 @@ public class UIController : MonoBehaviour
             +control.bulletsFiredTotal +"]";
         levelResultBulletHeavyFiredText.text = "Magnum Ammo Fired: " +control.bulletsHeavyFirred +" ["
             +control.bulletsHeavyFiredTotal +"]";
-            
+        levelResultMissleFiredText.text = "Missle Ammo Fired: " +control.missleFired +" ["
+            +control.missleFiredTotal +"]";   
         
     }
 

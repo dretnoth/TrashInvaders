@@ -10,17 +10,23 @@ public class BossController : MonoBehaviour
         isEscaping=false, isBreakingApart=false;
     public int hitPointOriginal=100, hitPointCurrent=100, trashToDrop=50, dustDrop=300;
 
+    public bool combatMethodLeftToRight=true, combatMethodRuller;
+
     public bool isUsingSingleBoxDropBattleTechnique;
     public bool isUsingTetrisTechnique;
     public bool isUsingDustingTechnique;
     public bool isDropingBombsTechnique;
+    public bool isUsingCansTimedTechnique, isUsingCansPositionTechnique;
 
-    Vector3 pos, dustPos;
+    Vector3 pos, dustPos, rullerTargetPosistion;
+    bool rullerOnSpot;
 
     public float dropInterval = 2, explodeInterval=4.5f;
     public float dustIntervalMin= 0.15f, dustIntervalMax = 0.75f;
     public float bombIntervalMin= 0.5f, bombIntervalMax = 5f;
-    float dropTimer = 0, dustTimer=0, bombTimer=0;
+    public float rullerStayIntervalMin=2.5f, rullerStayIntervalMax=4f;
+    public float cansIntervalMin =1.5f, cansIntervalMax =3f;
+    float dropTimer = 0, dustTimer=0, bombTimer=0, cansTimer=0, rullerTimer=0;
 
     float percentualDamageRate=1,  flufTimer=0;
 
@@ -52,6 +58,7 @@ public class BossController : MonoBehaviour
         bombTimer = Random.Range(bombIntervalMin, bombIntervalMax);
         hitPointOriginal = hitPointCurrent;
         percentualDamageRate = 1;
+        
     }
 
     
@@ -69,17 +76,56 @@ public class BossController : MonoBehaviour
                 if(Random.Range(0,100) > 50){
                     isMovingLeft = false;
                 }
+                if(combatMethodRuller){
+                    rullerTargetPosistion = transform.position;
+                }
             }
         }
 
+
         if(isFigthing){
-            if(isMovingLeft){
-                pos.x -= speedMove * Time.deltaTime;
-                if(pos.x < -5){isMovingLeft = false;}
-            }else{
-                pos.x += speedMove * myDeltaTime;
-                if(pos.x > 5){isMovingLeft = true;}
+
+            if(combatMethodLeftToRight){
+                if(isMovingLeft){
+                    pos.x -= speedMove * Time.deltaTime;
+                    if(pos.x < -5){isMovingLeft = false;}
+                }else{
+                    pos.x += speedMove * myDeltaTime;
+                    if(pos.x > 5){isMovingLeft = true;}
+                }    
             }
+
+            if(combatMethodRuller){
+                if(!rullerOnSpot){
+                    if(pos.x > rullerTargetPosistion.x){
+                        pos.x -= speedMove * Time.deltaTime;
+                        if(pos.x < rullerTargetPosistion.x){
+                            pos.x = rullerTargetPosistion.x;
+                            rullerOnSpot = true;
+                        }
+                    }
+                    if(pos.x < rullerTargetPosistion.x){
+                        pos.x += speedMove * Time.deltaTime;
+                        if(pos.x > rullerTargetPosistion.x){
+                            pos.x = rullerTargetPosistion.x;
+                            rullerOnSpot = true;
+                        }
+                    }
+                    if(pos.x == rullerTargetPosistion.x) rullerOnSpot = true;
+                }else{
+                    rullerTimer -=Time.deltaTime;
+                    if(rullerTimer < 0){
+                        rullerTimer = Random.Range(rullerStayIntervalMin, rullerStayIntervalMax);
+                        rullerTargetPosistion.x = (float)( (int)(Random.Range(-5.5f, 5.5f)) );
+                        rullerOnSpot = false;
+                        if(isUsingCansPositionTechnique){
+                            DropCan();
+                        }
+                    }
+                }
+            }
+            
+
 
             if(isUsingSingleBoxDropBattleTechnique){
                 dropTimer -= myDeltaTime;
@@ -111,6 +157,14 @@ public class BossController : MonoBehaviour
                     controll.spawnControll.CommandToSpawnABomb(trashSpawningPosition.position);
                     bombTimer = Random.Range(bombIntervalMin, bombIntervalMax);
                 }
+            }
+
+            if(isUsingCansTimedTechnique){
+                cansTimer -= myDeltaTime;
+                if(cansTimer < 0){
+                    cansTimer = Random.Range(cansIntervalMin, cansIntervalMax);
+                    DropCan();
+                }                
             }
 
             
@@ -201,6 +255,12 @@ public class BossController : MonoBehaviour
             isEscaping = true;
         }
     }
+
+
+    void DropCan(){
+        controll.spawnControll.CommandToSpawnATrashCan(trashSpawningPosition.position);
+    }
+
 
     void SpawnAPuff(){
         Vector3 pos = transform.position;

@@ -932,7 +932,7 @@ MonoBehaviour:
   colectingTrashInterval: 0.15
   dumpingTrashinterval: 6
   collectedTrashCurrent: 0
-  collectedTrashCapacity: 50
+  collectedTrashCapacity: 75
   gameController: {fileID: 0}
   mySpriteRenderer: {fileID: 2759441225354721744}
   bulletAS: {fileID: 9085328620975597222}
