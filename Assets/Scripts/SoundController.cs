@@ -9,7 +9,8 @@ public class SoundController : MonoBehaviour
     public GameController gameController;
     public AudioSource musicMenuAS, musicInGameAS;
     public AudioSource audioSRooster, audioSCheer, audioSYouLost, audioSYouWin, 
-        audioSExplosion, audioSPaper, audioTruckHonk, audioReadyFight;
+        audioSExplosion, audioSPaper, audioTruckHonk, audioRecicleBin,
+        audioReadyFight;
     public AudioSource audioButtonHiglight, audioButtonPress, audioButtonSwithc;
     public AudioSource[] poopAudioClips;
     public AudioClip[] musicAudioClips, uiButonHighlightACs, uiButtonPressACs,
@@ -57,6 +58,8 @@ public class SoundController : MonoBehaviour
 
 
     public void CommandPlayTruckHonk(){audioTruckHonk.Play();}
+
+    public void CommandPlayRecicleBin(){audioRecicleBin.Play();}
 
     public void CommandPlayReadyFight(){audioReadyFight.Play();}
 

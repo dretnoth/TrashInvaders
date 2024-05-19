@@ -84,6 +84,7 @@ public class TrashTruckFella : MonoBehaviour
         gameController.OperationAddSweapedTrashPacked(trashCollected);
         trashCollected = 0;
         gameController.trashTruckSweeping -= 1;
+        gameController.soundController.CommandPlayRecicleBin();
         Destroy(gameObject);
     }
 

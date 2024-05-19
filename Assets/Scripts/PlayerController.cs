@@ -230,6 +230,9 @@ public class PlayerController : MonoBehaviour
             isStunned = true;
             mySpriteRenderer.color = Color.red;  
             gameController.magnumRevolver.ChangeOnBulletsInChamber();
+            if(gameController.spawnControll.listOfGhosts.Count < 20){
+                gameController.spawnControll.CommandToSpawnAPollutionGhost();
+            }
         }        
     }
 
@@ -245,12 +248,19 @@ public class PlayerController : MonoBehaviour
                 if(hit != null){
                     for(int i = 0; i < hit.Length; i++) {
                         if(!isDone)
-                        if(hit[i].transform.gameObject.activeInHierarchy == true)
-                        if(hit[i].transform.gameObject.tag == "Trash"){
-                            isDone = true;
-                            hit[i].transform.GetComponent<Box>().Deactivate();                            
-                            OperationpickedUpTrashPackelt();
-                        }
+                        if(hit[i].transform.gameObject.activeInHierarchy == true){
+                            if(hit[i].transform.gameObject.tag == "Trash"){
+                                isDone = true;
+                                hit[i].transform.GetComponent<Box>().Deactivate();                            
+                                OperationpickedUpTrashPackelt();
+                                gameController.spawnControll.CommandToSpawnAFlashPuff(hit[i].transform.position);
+                            }
+                            if(hit[i].transform.gameObject.tag == "Can"){
+                                isDone = true;
+                                hit[i].transform.GetComponent<Can>().CommandForCanToBreak();
+                                gameController.spawnControll.CommandToSpawnAFlashPuff(hit[i].transform.position);
+                            }    
+                        }//active in hierarchy                        
                     }
                 }
             }
@@ -297,6 +307,7 @@ public class PlayerController : MonoBehaviour
         if(choseOne == 0){
             gameController.spawnControll.CommandToSpanwAMissle(
                 true, false, false, Vector3.zero);
+            gameController.spawnControll.CommandToBreakBoxesInARange(transform.position, 4f);
         }else if(choseOne == 1){
             gameController.spawnControll.CommandSpawnAArmyCar();
         }else if(choseOne == 2){

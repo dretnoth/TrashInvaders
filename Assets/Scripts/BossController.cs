@@ -327,6 +327,9 @@ public class BossController : MonoBehaviour
                 pos.y += Random.Range(0.5f, 3f);
                 controll.spawnControll.CommandToSpawnAWhitePuff(pos);
             }
+            if(controll.spawnControll.listOfGhosts.Count < 25){
+                controll.spawnControll.CommandToSpawnAPollutionGhost();
+            }
             Destroy(gameObject);
         }
     }

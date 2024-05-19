@@ -39,19 +39,35 @@ public class BulletControll : MonoBehaviour
             if(otherBox != null)
             if(otherBox.isBox){
                 otherBox.CommandGotHit(damagePower);
-                isBulletDone = true;
+                if(damagePower == 1) isBulletDone = true;
             }
         }
 
+        
         if(other.tag == "Can"){
-            Can otherBox = other.GetComponent<Can>();
+            Can otherBox = other.transform.GetComponent<Can>();
             if(otherBox != null){
                 otherBox.CommandGotHit(damagePower);
-                isBulletDone = true;
+                if(damagePower == 1)  Deactivate();
             }
-        }
+        }  
+              
 
 
         if(isBulletDone){Deactivate();}
     }
+
+
+    
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.transform.tag == "Can"){
+            Can otherBox = other.transform.GetComponent<Can>();
+            if(otherBox != null){
+                otherBox.CommandGotHit(damagePower);
+                if(damagePower == 1)  Deactivate();
+            }
+        }
+    }
+    
+    
 }

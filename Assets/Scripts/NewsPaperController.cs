@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-//using Microsoft.Unity.VisualStudio.Editor;
-//using UnityEngine.UIElements;
 
 public class NewsPaperController : MonoBehaviour
 {
@@ -15,9 +13,12 @@ public class NewsPaperController : MonoBehaviour
 
     [Header("Front Newspaper")]
     public Transform frontPageNewspaperPanel;
-    public TMP_Text DateTymeStamp, articleLabel, mainArticle, secondArticle;
+    public TMP_Text NewsPaperName, newspaperLabel, DateTymeStamp, 
+        articleLabel, mainArticle, secondArticle;
     public Image articleImage1, articleImage2,
         secondArticeImage;
+    public bool isTextFondCustomized = true;
+    public TMP_FontAsset normalizedFont, newsReaderNormalFont, newsReaderItalicFont;
 
 
 
@@ -41,5 +42,23 @@ public class NewsPaperController : MonoBehaviour
             control.soundController.CommandPlayPaper();
     }
 
+    public void ButtonChangeFontOnNewsPaper(){
+        isTextFondCustomized = !isTextFondCustomized;
+        if(isTextFondCustomized){
+            NewsPaperName.font = newsReaderNormalFont;
+            newspaperLabel.font = newsReaderItalicFont;
+            DateTymeStamp.font = newsReaderItalicFont;
+            articleLabel.font = newsReaderNormalFont;
+            mainArticle.font = newsReaderNormalFont;
+            secondArticle.font = newsReaderNormalFont;
+        }else{
+            NewsPaperName.font = normalizedFont;
+            newspaperLabel.font = normalizedFont;
+            DateTymeStamp.font = normalizedFont;
+            articleLabel.font = normalizedFont;
+            mainArticle.font = normalizedFont;
+            secondArticle.font = normalizedFont;
+        }
+    }
     
 }

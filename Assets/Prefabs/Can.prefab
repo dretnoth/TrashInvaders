@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2687406151290792013}
   - component: {fileID: 5055224975702813029}
   - component: {fileID: 1291899093582564433}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: soda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 392503866535928084}
   - component: {fileID: 1651479734910646924}
   - component: {fileID: 4602450725897386402}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: soda(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 4581157730478502535}
   - component: {fileID: 8173501446600883463}
   - component: {fileID: 1453641933958702891}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: cola(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 6331386035931276352}
   - component: {fileID: 8113371416908957749}
   - component: {fileID: 620495916317522824}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: can
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 7457999221606075049}
   - component: {fileID: 2020744904083234353}
   - component: {fileID: 5476174139543970185}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: can(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 3156757666205607218}
   - component: {fileID: 5047956454219459266}
   - component: {fileID: 867623009180961409}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: energy-drink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 8681898828465479538}
   - component: {fileID: 7664808892185589948}
   - component: {fileID: 4898672654078896337}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: tin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   - component: {fileID: 3103112541036537211}
   - component: {fileID: 6108940983636333388}
   - component: {fileID: 7747282493341397335}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: can(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 1347643573563057773}
   - component: {fileID: 8684422194695388675}
   - component: {fileID: 6250039378903219719}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: soda-can
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 7205218174693094802}
   - component: {fileID: 463540987030228436}
   - component: {fileID: 5599731176612952151}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: beer-can
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 6590151151875507191}
   - component: {fileID: 6863415171203266353}
   - component: {fileID: 417809022672012322}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: beer-can(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1441,7 @@ GameObject:
   - component: {fileID: 910784542189672195}
   - component: {fileID: 732750220770354575}
   - component: {fileID: 1776638178535450330}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: canned-sardines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1571,7 +1571,8 @@ GameObject:
   - component: {fileID: 5644379651214317473}
   - component: {fileID: 7763575852116936213}
   - component: {fileID: 6659814724578791815}
-  m_Layer: 8
+  - component: {fileID: 2727018355868218020}
+  m_Layer: 7
   m_Name: Can
   m_TagString: Can
   m_Icon: {fileID: 0}
@@ -1636,8 +1637,8 @@ MonoBehaviour:
   - {fileID: 1347643573563057773}
   - {fileID: 8681898828465479538}
   myColider: {fileID: 0}
-  hitPointCurrent: 5
-  hitPointMax: 5
+  hitPointCurrent: 3
+  hitPointMax: 3
   isBroken: 0
   myColor:
   - {r: 0.9803922, g: 0.49803925, b: 0.21568629, a: 0}
@@ -1681,6 +1682,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &2727018355868218020
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287783395389790697}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.8}
+  m_EdgeRadius: 0
 --- !u!1 &8453249367055815313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1738,7 @@ GameObject:
   - component: {fileID: 2750193362110982241}
   - component: {fileID: 2795151573589503257}
   - component: {fileID: 1028751458464689545}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: beer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1822,7 +1868,7 @@ GameObject:
   - component: {fileID: 181409437633818128}
   - component: {fileID: 1569519705749024906}
   - component: {fileID: 8140000536880400124}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: coconut-milk
   m_TagString: Untagged
   m_Icon: {fileID: 0}

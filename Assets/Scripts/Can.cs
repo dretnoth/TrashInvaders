@@ -31,6 +31,7 @@ public class Can : MonoBehaviour
 
     public void CommandGotHit(int damage){
         hitPointCurrent -= damage;
+        gameControler.spawnControll.CommandToSpawnAFlashPuff(transform.position);
             if(hitPointCurrent <= 0){
                 CommandForCanToBreak();
             }
@@ -41,7 +42,7 @@ public class Can : MonoBehaviour
         if(!isBroken){
             isBroken = true;    
             
-            int numberOfPackets = (int) Random.Range(1, 9);
+            int numberOfPackets = (int) Random.Range(3f, 9f);
             Quaternion angle = transform.rotation;
             Vector3 pos = transform.position;
 
@@ -58,7 +59,7 @@ public class Can : MonoBehaviour
                 if(i==8) pos = new Vector3(transform.position.x +0.2f, transform.position.y +0.2f, 0);
                 
                 gameControler.spawnControll.CommandToSpawnATrashPacklet(
-                    transform.position, transform.rotation, myColor[lastVersionOfCan]);
+                    pos, transform.rotation, myColor[lastVersionOfCan]);
                 }
             gameControler.spawnControll.CommandToSpawnAExplosion(transform.position);
             gameControler.spawnControll.controller.OperationAddShutedDownTrashBox();

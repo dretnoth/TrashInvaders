@@ -7,11 +7,14 @@ public class ArmyCar : MonoBehaviour
     public GameController gameController;
     public Transform targetDetected, targetBoss;
     public bool isAriving=true, isFigthing, isDeparting, 
-        isDrivingLeft, isDrivingRight=true, isHavingTarget;
+        isDrivingLeft, isDrivingRight=true, isHavingTarget, 
+        isStunned, isStunProtected;
     public int ammoReserve = 50;
     public float ammoInterval = 0.25f, speed = 2.2f;
     float ammoTimer=0;
-    public SpriteRenderer spriteRenderer;
+    public float stunedInterval=4f, stunProtectionInterval=3f;
+    float stunTimer=0;
+    public SpriteRenderer mySpriteRenderer;
     Vector3 pos, targetPosition;
     public AudioSource audioGunShot;
 
@@ -25,6 +28,7 @@ public class ArmyCar : MonoBehaviour
     void Update()
     {
         pos = transform.position;
+        if(!isStunned){
         if(isDrivingLeft){
             pos.x -= speed * Time.deltaTime;
             if(isAriving){
@@ -67,6 +71,28 @@ public class ArmyCar : MonoBehaviour
                 ammoTimer = ammoInterval;
                 OperationFireBullet();
             }
+        }    
+        }
+        
+
+        if(isStunned || isStunProtected){
+                stunTimer += Time.deltaTime;
+
+                if(isStunned)
+                if(stunTimer > stunedInterval){
+                    stunTimer = 0;
+                    isStunned = false;
+                    isStunProtected = true;
+                    mySpriteRenderer.color = Color.blue;
+                    gameController.magnumRevolver.ChangeOnBulletsInChamber();
+                }
+
+                if(isStunProtected)
+                if(stunTimer > stunProtectionInterval){
+                    stunTimer = 0;
+                    isStunProtected = false;
+                    mySpriteRenderer.color = Color.white;
+                }
         }
     }
 
@@ -74,6 +100,21 @@ public class ArmyCar : MonoBehaviour
     void OperationFireBullet(){
         isHavingTarget = false;
         targetDetected = null;
+
+        RaycastHit2D[] cans = Physics2D.RaycastAll(transform.position, Vector2.up, 10f);
+        bool isTargetSet = false;
+        if(cans != null){
+            for(int i = 0; i < cans.Length; i++)
+            if(!isTargetSet) {
+                if(cans[i].transform.gameObject.activeInHierarchy == true){
+                    if(cans[i].transform.tag == "Can"){
+                        isTargetSet = true;
+                        targetDetected = cans[i].transform;
+                    }
+                }
+            }
+        }
+
         if(targetBoss == null){
             if(gameController.bossTransform != null){
                 if(gameController.bossTransform.gameObject.activeInHierarchy == true){
@@ -119,11 +160,19 @@ public class ArmyCar : MonoBehaviour
         if(toRight){
             isDrivingLeft = false;
             isDrivingRight = true;
-            spriteRenderer.flipX = true;
+            mySpriteRenderer.flipX = true;
         }else{
             isDrivingLeft = true;
             isDrivingRight = false;
-            spriteRenderer.flipX = false;
+            mySpriteRenderer.flipX = false;
         }
     }
+
+    public void CommandGotHitByABomb(){
+        if(!isStunned && !isStunProtected){
+            isStunned = true;
+            mySpriteRenderer.color = Color.red;  
+        }   
+    }
+
 }

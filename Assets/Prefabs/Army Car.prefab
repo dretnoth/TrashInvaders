@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 1578728512001607700}
   m_Layer: 0
   m_Name: Army Car
-  m_TagString: Untagged
+  m_TagString: ArmyCar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,10 +268,14 @@ MonoBehaviour:
   isDrivingLeft: 1
   isDrivingRight: 0
   isHavingTarget: 0
+  isStunned: 0
+  isStunProtected: 0
   ammoReserve: 50
   ammoInterval: 0.25
   speed: 2.2
-  spriteRenderer: {fileID: 9118626999219950506}
+  stunedInterval: 4
+  stunProtectionInterval: 3
+  mySpriteRenderer: {fileID: 9118626999219950506}
   audioGunShot: {fileID: 5188865719086844350}
 --- !u!50 &1578728512001607700
 Rigidbody2D:

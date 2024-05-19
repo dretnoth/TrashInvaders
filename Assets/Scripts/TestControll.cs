@@ -5,7 +5,8 @@ using UnityEngine;
 public class TestControll : MonoBehaviour
 {
     public bool isTestingOwerdrive;
-    public bool isMissleTestFromTruck, isSupplyPlane, isArmyCar, isFastFire;
+    public bool isMissleTestFromTruck, isSupplyPlane, isArmyCar, 
+        isFastFire, isTrashCan;
     public GameController gameController;
     
     void Start()
@@ -42,6 +43,11 @@ public class TestControll : MonoBehaviour
         if(isFastFire){
             gameController.playerController.fastFireAmooReserve +=50;
             gameController.playerController.isFastFireOn = true;
+        }
+        if(isTrashCan){
+            gameController.spawnControll.CommandToSpawnATrashCan(
+                gameController.bossTransform.position
+            );
         }
     }
 }

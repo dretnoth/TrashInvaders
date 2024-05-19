@@ -13,10 +13,12 @@ public class MagnumRevolverGraphicController : MonoBehaviour
     public int bulletsInChamber=6;
     PlayerController playerController = null;
     public Transform reloadingMesage; public TMP_Text reloadingMesageText;
+    public string mesage="";
 
     void Start()
     {
         if(gameController == null) gameController = GameController.controll;
+        OperationReloadingMesage(true);
     }
 
     
@@ -27,11 +29,8 @@ public class MagnumRevolverGraphicController : MonoBehaviour
 
 
     public void ChangeOnBulletsInChamber(){
-        if(gameController.isPlayModeOn){
-            OperationReloadingMesage(true);
-        }else{
-            OperationReloadingMesage(false);
-        }
+        
+        //bulletsPart
 
         if(playerController == null){
             playerController = gameController.playerTransform.
@@ -58,67 +57,22 @@ public class MagnumRevolverGraphicController : MonoBehaviour
             OperationSetMagnumVisible(false);
         }
 
-        if(gameController.isFightOn == false){
-            reloadingMesageText.text = "Get ready!";
-        }else{
-            if(playerController != null){
-                if(playerController.isStunned){
-                    reloadingMesageText.text = "Stuned!";
-                } else if(playerController.isReloadingHeavyBullet){
-                    reloadingMesageText.text = "Reloading!";
-                } else if(playerController.isRevolverSpining){
-                    reloadingMesageText.text = "Wait!";
-                } else if(bulletsInChamber == 6){
-                    reloadingMesageText.text = "";
-                }
-                
 
-                
-            }else{
-                if(gameController.isFightOn){
-                    reloadingMesageText.text = "Hallo?";
-                }
-            }
+        //mesage part
+        mesage = "";
+        if(playerController != null){
+            if(playerController.isFastFireOn) mesage = "Fast Fire Mod!";
+            if(playerController.isReloadingHeavyBullet) mesage = "Reloading!";
+            if(playerController.isRevolverSpining) mesage = "Spinning Barrel!";
+            if(playerController.isStunned) mesage = "Stuned!";
         }
-        
-        
-        
-
-       
+        if(gameController.isFightOn) mesage = "Figt is not on!";
+        reloadingMesageText.text = mesage;
 
         
-
-        
-
-        
-
-        //Debug.Log($"");
     }//ChangeOnBulletsInChamber
 
 
-    /*
-    //delete after testing
-    public void OrderMagnumRevolver(){
-            OperationReloadingMesage(true);
-        if(gameController.isFightOn == false){
-            reloadingMesageText.text = "Get ready!";
-        }
-
-        if(playerController == null) 
-            playerController = gameController.playerTransform.GetComponent<PlayerController>();
-
-        if(playerController.isReloadingHeavyBullet){
-            reloadingMesageText.text = "Reloading!";
-        }
-        if(playerController.isRevolverSpining){
-            reloadingMesageText.text = "Wait!";
-        }
-        if(!playerController.isReloadingHeavyBullet && !playerController.isRevolverSpining){
-            OperationReloadingMesage(false);
-        }
-                
-    }
-    */
 
     void OperationReloadingMesage(bool option){
         if(option){

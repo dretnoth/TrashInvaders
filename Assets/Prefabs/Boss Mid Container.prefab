@@ -152,7 +152,7 @@ MonoBehaviour:
   isUsingTetrisTechnique: 1
   isUsingDustingTechnique: 1
   isDropingBombsTechnique: 1
-  isUsingCansTimedTechnique: 0
+  isUsingCansTimedTechnique: 1
   isUsingCansPositionTechnique: 0
   dropInterval: 1.75
   explodeInterval: 4.5

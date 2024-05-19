@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpawnControll : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class SpawnControll : MonoBehaviour
     public GameObject prefabTrashTruckFella, prefabArmyCar;
     public GameObject prefabSupplyPlane, prefabSupplyBox;
     public GameObject prefabExplosion, prefabGroundExplosion;
-    public GameObject prefabBlackPuff, prefabWhitePuff;
+    public GameObject prefabBlackPuff, prefabWhitePuff, prefabFlashPuff;
+    public GameObject prefabPolutionGhost;
 
 
 
@@ -29,6 +31,8 @@ public class SpawnControll : MonoBehaviour
     public List<Transform> listOfGroundExplosions = new List<Transform>();
     public List<Transform> listOfBlackPuffs = new List<Transform>();
     public List<Transform> listOfWhitePuffs = new List<Transform>();
+     public List<Transform> listOfFlashPuffs = new List<Transform>();
+    public List<Transform> listOfGhosts = new List<Transform>();
 
 
     [Header("References")]
@@ -325,6 +329,30 @@ public class SpawnControll : MonoBehaviour
         myTransform.transform.position = pos;    
     }
 
+    public void CommandToSpawnAFlashPuff(Vector3 pos){
+        bool isFounded = false;
+        int lenghtOfList = listOfFlashPuffs.Count;
+        Transform myTransform = null;
+        
+        for(int i = 0; i < lenghtOfList; i++) {
+            if(!isFounded){
+                if(listOfFlashPuffs[i].gameObject.activeInHierarchy == false){
+                    myTransform = listOfFlashPuffs[i];
+                    isFounded = true;
+                }
+            }
+        }
+
+        if(!isFounded){
+            GameObject go = (GameObject)Instantiate(prefabFlashPuff, Vector3.zero, Quaternion.identity);
+            myTransform = go.transform;
+            listOfFlashPuffs.Add(myTransform);            
+            go.transform.SetParent(folderForVisuals);
+        }
+
+        myTransform.gameObject.SetActive(true);
+        myTransform.transform.position = pos;    
+    }
 
    
 
@@ -374,7 +402,7 @@ public class SpawnControll : MonoBehaviour
 
     public void CommandSpawnASupplyPlane(){
         if(prefabSupplyPlane != null){
-            Vector3 pos = new Vector3 (-9, 5, 0);
+            Vector3 pos = new Vector3 (-9, 4.5f, 0);
             GameObject go = (GameObject)Instantiate(prefabSupplyPlane, pos, Quaternion.identity);
             go.GetComponent<SupplyPlane>().CommandSetFlyDirectionToRight();
         }
@@ -406,7 +434,46 @@ public class SpawnControll : MonoBehaviour
         go.GetComponent<Missle>().GetTarget();
         controller.OperationFirredMissle();
     }
+
+
+    public void CommandToSpawnAPollutionGhost(){
+        GameObject go = (GameObject)Instantiate(
+            prefabPolutionGhost, new Vector3(0,0,0), Quaternion.identity);
+        listOfGhosts.Add(go.transform);
+    }
+
+
+
+    public void CommandToBreakAllBoxes(){
+        for(int i = 0; i < listOfTrashBoxes.Count; i++) {
+            if(listOfTrashBoxes[i] != null)
+            if(listOfTrashBoxes[i].gameObject.activeInHierarchy == true)
+                listOfTrashBoxes[i].GetComponent<Box>().CommandForBoxToBreak(false, true);
+        }
+
+        for(int i = 0; i < listOfTrashCans.Count; i++) {
+            if(listOfTrashCans[i] != null)
+            if(listOfTrashCans[i].gameObject.activeInHierarchy == true)
+                listOfTrashCans[i].GetComponent<Can>().CommandForCanToBreak();
+        }
+    }
    
+
+    public void CommandToBreakBoxesInARange(Vector3 positionOfBlast, float blastRange){
+        for(int i = 0; i < listOfTrashBoxes.Count; i++) {
+            if(listOfTrashBoxes[i] != null)
+            if(listOfTrashBoxes[i].gameObject.activeInHierarchy == true)
+            if(Vector3.Distance(listOfTrashBoxes[i].position,positionOfBlast) < blastRange)
+                listOfTrashBoxes[i].GetComponent<Box>().CommandForBoxToBreak(false, true);
+        }
+
+        for(int i = 0; i < listOfTrashCans.Count; i++) {
+            if(listOfTrashCans[i] != null)
+            if(listOfTrashCans[i].gameObject.activeInHierarchy == true)
+            if(Vector3.Distance(listOfTrashCans[i].position,positionOfBlast) < blastRange)
+                listOfTrashCans[i].GetComponent<Can>().CommandForCanToBreak();
+        }
+    }
 
 
 
@@ -487,7 +554,27 @@ public class SpawnControll : MonoBehaviour
             go.SetActive(false);
         }
 
+        for(int i = 0; i < 50; i++) {
+            go = (GameObject)Instantiate(prefabFlashPuff, Vector3.zero, Quaternion.identity);
+            listOfFlashPuffs.Add(go.transform);
+            go.transform.SetParent(folderForVisuals);
+            go.SetActive(false);
+        }
+
     }//fill the pool
+
+
+    public void CommandEngGameCleaning(){
+        for(int i = 0; i < listOfGhosts.Count; i++) {
+            if(listOfGhosts[i] != null)
+            listOfGhosts[i].GetComponent<InstantDestroy>().DestroyMe();
+        }
+        listOfGhosts.Clear();
+        for(int i = 0; i < listOfTrashPackets.Count; i++) {
+            if(listOfTrashPackets[i] != null)
+            listOfTrashPackets[i].gameObject.SetActive(false);
+        }
+    }
     
     
     void Update()

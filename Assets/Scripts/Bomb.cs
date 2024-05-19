@@ -24,6 +24,12 @@ public class Bomb : MonoBehaviour
             myTrashTruckFella = other.GetComponent<TrashTruckFella>();
             if(myTrashTruckFella != null) myTrashTruckFella.GotHitByABomb();
         }
+        if(other.tag == "ArmyCar"){
+            ArmyCar hittedCar = other.GetComponent<ArmyCar>();      
+            if(hittedCar != null){
+                hittedCar.CommandGotHitByABomb();
+            }
+        }
         
 
         if(iamDone){

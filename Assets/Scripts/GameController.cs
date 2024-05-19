@@ -189,9 +189,10 @@ public class GameController : MonoBehaviour
     public void CommandRunASweepOperation(){
         isEndOfTheLevel = true;
         spawnControll.CommandSpawnATrashTruckFella();
+        spawnControll.CommandToBreakAllBoxes();
         playerController.OperationDropCoolectedTrash();
     }
-
+    
 
     public void CommandPausingTheGame(bool whatToDo){
         if(whatToDo){

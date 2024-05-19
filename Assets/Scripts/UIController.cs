@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour
 
     [Header("Texts")]
     public TMP_Text screenAnoucmentTextField;
-    public TMP_Text testNumber;
     public TMP_Text levelDescriptionLevelNumber, levelDescriptionMainText, levelDescriptionSkillsText;
     public TMP_Text levelResultLevelNumberText, leverResultBossText, levelResultBoxText, 
         levelResultPacketSweepedText, levelResultPacketOnFieldText, levelResultPolutionRate, 
@@ -125,9 +124,6 @@ public class UIController : MonoBehaviour
                 bossHPBarImage.fillAmount = 0;
             }
         }
-
-        //on final release remove the test number
-        //testNumber.text = control.spawnControll.detectedSpawns.ToString();
     }
 
 
@@ -148,8 +144,6 @@ public class UIController : MonoBehaviour
         #if UNITY_PLAYER
         #endif
         Debug.Log($"Dearing to close app");
-        //uncertain of effectivity on PC, web, or android
-        //Test it then decide
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
@@ -361,7 +355,8 @@ public class UIController : MonoBehaviour
         myString += " ["+ control.bossesDestroyed +"]";
         leverResultBossText.text = myString;      
         levelResultBoxText.text = "Trash Boxes Destroyed/Drop: "+ control.trashBoxShotDown 
-            +"/"+ control.trashBoxDroped;
+            +"/"+ control.trashBoxDroped +" ["+ control.trashBoxDropedTotal
+            +"/"+ control.trashBoxShotDownTotal +"]";
         levelResultPacketSweepedText.text = "Trash Sweaped: " +control.trashPacketSweeped  +" ["
             +control.trashPacketSweepedTotal +"]";
         levelResultPacketOnFieldText.text = "Trash still on the field: " +control.trashPacketStillOnField;
@@ -385,6 +380,8 @@ public class UIController : MonoBehaviour
         control.isWictory = true;
         endWictoryText.text = endWictoryString + control.trashPacketStillOnField;
         soundController.CommandPlayYouWin();
+        //shall i put this to gamecontroller?
+        control.spawnControll.CommandEngGameCleaning();
     }
 
 
